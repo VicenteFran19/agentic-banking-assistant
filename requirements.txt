@@ -1,0 +1,11 @@
+langgraph==1.2.14
+chromadb==1.5.9
+rank-bm25==0.2.2
+openai==3.26.1
+scikit-learn==1.8.0
+numpy==2.4.4
+fastapi==0.143.0
+uvicorn==0.54.0
+pydantic==2.14.0
+httpx==0.28.1
+pytest==9.1.1
