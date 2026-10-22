@@ -4,9 +4,11 @@ from __future__ import annotations
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from .service import Assistant
+from .config import get_settings
 
 state: dict = {}
 
@@ -19,6 +21,14 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Agentic Banking Assistant", version="1.0.0", lifespan=lifespan)
+
+# CORS: permite que el frontend (p. ej. en Vercel) llame a la API desde el navegador.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=get_settings().allowed_origins,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
+)
 
 
 class ChatRequest(BaseModel):

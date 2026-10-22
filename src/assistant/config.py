@@ -35,6 +35,8 @@ class Settings:
     price_input_per_1m: float = 0.15
     price_output_per_1m: float = 0.60
     price_embedding_per_1m: float = 0.02
+    # Orígenes permitidos para CORS (frontend). "*" permite cualquiera; en producción usa la URL de Vercel.
+    allowed_origins: list[str] = field(default_factory=lambda: ["*"])
     docs_dir: Path = field(default_factory=lambda: ROOT / "data" / "docs")
 
 
@@ -50,4 +52,5 @@ def get_settings() -> Settings:
         price_input_per_1m=float(env.get("PRICE_INPUT_PER_1M", "0.15")),
         price_output_per_1m=float(env.get("PRICE_OUTPUT_PER_1M", "0.60")),
         price_embedding_per_1m=float(env.get("PRICE_EMBEDDING_PER_1M", "0.02")),
+        allowed_origins=[o.strip() for o in env.get("ALLOWED_ORIGINS", "*").split(",") if o.strip()],
     )
