@@ -40,4 +40,16 @@ def test_citas_deben_estar_entre_las_fuentes_recuperadas():
     assert not citations_grounded("Cuesta S/ 99. [fuente: inventado.md]", recuperadas)
     assert not citations_grounded("x [fuente: tarjeta_credito.md] [fuente: otro.md]", recuperadas)
     assert not citations_grounded("Cuesta S/ 99.", recuperadas)
-    
+
+
+def test_enmascara_cci_y_dni_con_puntos():
+    masked, changed = mask_pii("Mi CCI es 00212345678901234567 y mi DNI 12.345.678")
+    assert changed and "[CCI]" in masked and "[DNI]" in masked
+    assert "00212345678901234567" not in masked and "12.345.678" not in masked
+
+
+def test_no_confunde_montos_con_dni():
+    for text in ("Quiero 10000000 soles a 12 meses", "S/. 12345678 a 12 meses",
+                 "Un préstamo de 20000000 dólares", "$ 12345678"):
+        masked, changed = mask_pii(text)
+        assert not changed, text

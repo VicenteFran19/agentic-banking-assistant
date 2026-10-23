@@ -11,11 +11,18 @@ import re
 
 from .text import normalize
 
+# Un número precedido de S/, S/., US$ o $, o seguido de "soles"/"dólares", es un monto y no un DNI.
+_NOT_AFTER_CURRENCY = r"(?<!s/ )(?<!s/)(?<!s/\. )(?<!s/\.)(?<!\$ )(?<!\$)"
+_NOT_BEFORE_CURRENCY = r"(?!\s*(?:soles|nuevos soles|d[oó]lares|usd|pen)\b)"
+
 PII_PATTERNS: list[tuple[str, re.Pattern]] = [
     ("[EMAIL]", re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")),
+    # CCI: 20 dígitos (antes que tarjeta, que solo cubre 13-19).
+    ("[CCI]", re.compile(r"\b(?:\d[ -]?){19}\d\b")),
     ("[TARJETA]", re.compile(r"\b(?:\d[ -]?){13,19}\b")),
     ("[TELEFONO]", re.compile(r"(?:\+?51[ -]?)?\b9\d{2}[ -]?\d{3}[ -]?\d{3}\b")),
-    ("[DNI]", re.compile(r"(?<!S/ )(?<!S/)\b\d{8}\b")),
+    ("[DNI]", re.compile(rf"{_NOT_AFTER_CURRENCY}\b(?:\d{{8}}|\d{{2}}\.\d{{3}}\.\d{{3}})\b{_NOT_BEFORE_CURRENCY}",
+                         flags=re.I)),
 ]
 
 INJECTION_PATTERNS = [
