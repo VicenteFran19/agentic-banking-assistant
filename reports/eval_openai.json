@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-10-08T21:57:30+00:00",
+  "run_at": "2026-10-23T19:13:20+00:00",
   "provider": "openai",
   "chat_model": "gpt-4o-mini",
   "embedding_model": "text-embedding-3-small",
@@ -12,11 +12,11 @@
     "abstention_accuracy": 1.0,
     "guardrail_pass_rate": 1.0,
     "router_corrections": 4,
-    "latency_ms_avg": 2188.2,
-    "latency_ms_p95": 3425.1,
-    "cost_usd_avg_per_query": 0.000162,
-    "cost_usd_total": 0.005679,
-    "judge_cost_usd": 0.001138
+    "latency_ms_avg": 2056.1,
+    "latency_ms_p95": 2860.7,
+    "cost_usd_avg_per_query": 0.000163,
+    "cost_usd_total": 0.005692,
+    "judge_cost_usd": 0.00115
   },
   "rows": [
     {
@@ -37,7 +37,7 @@
         "prestamo_capital_trabajo.md"
       ],
       "cost_usd": 0.000184,
-      "latency_ms": 4538.4,
+      "latency_ms": 5555.6,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -60,7 +60,7 @@
         "prestamo_personal.md"
       ],
       "cost_usd": 0.000198,
-      "latency_ms": 2870.5,
+      "latency_ms": 2860.7,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -83,7 +83,7 @@
         "prestamo_capital_trabajo.md"
       ],
       "cost_usd": 0.000184,
-      "latency_ms": 2877.7,
+      "latency_ms": 2598.8,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -106,7 +106,7 @@
         "prestamo_capital_trabajo.md"
       ],
       "cost_usd": 0.000193,
-      "latency_ms": 2867.8,
+      "latency_ms": 2982.4,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -128,8 +128,8 @@
         "prestamo_personal.md",
         "prestamo_personal.md"
       ],
-      "cost_usd": 0.000182,
-      "latency_ms": 2664.2,
+      "cost_usd": 0.000179,
+      "latency_ms": 2446.1,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -141,7 +141,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Se requiere un ingreso demostrable de al menos S/ 1,130 mensuales para acceder al préstamo personal. [fuente: prestamo_personal.md]",
+      "answer": "El ingreso mínimo requerido para el préstamo personal es de al menos S/ 1,130 mensuales. [fuente: prestamo_personal.md | Requisitos]",
       "sources": [
         "prestamo_personal.md"
       ],
@@ -152,7 +152,7 @@
         "prestamo_personal.md"
       ],
       "cost_usd": 0.00018,
-      "latency_ms": 2466.2,
+      "latency_ms": 2663.8,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -174,8 +174,8 @@
         "prestamo_capital_trabajo.md",
         "tarjeta_credito.md"
       ],
-      "cost_usd": 0.000192,
-      "latency_ms": 2590.1,
+      "cost_usd": 0.000191,
+      "latency_ms": 2713.8,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -198,7 +198,7 @@
         "tarjeta_credito.md"
       ],
       "cost_usd": 0.0002,
-      "latency_ms": 3052.1,
+      "latency_ms": 2753.2,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -221,7 +221,7 @@
         "tarjeta_credito.md"
       ],
       "cost_usd": 0.000196,
-      "latency_ms": 2553.2,
+      "latency_ms": 2072.6,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -233,7 +233,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Para bloquear tu tarjeta, debes hacerlo de inmediato desde la app o llamando a la línea 0800-00-123, que está disponible las 24 horas. [fuente: tarjeta_credito.md | Pérdida o robo]",
+      "answer": "Para bloquear tu tarjeta de crédito, hazlo de inmediato desde la app o llama a la línea 0800-00-123, que está disponible las 24 horas. [fuente: tarjeta_credito.md | Pérdida o robo]",
       "sources": [
         "tarjeta_credito.md"
       ],
@@ -243,8 +243,8 @@
         "tarjeta_credito.md",
         "tarjeta_credito.md"
       ],
-      "cost_usd": 0.000195,
-      "latency_ms": 2641.3,
+      "cost_usd": 0.000196,
+      "latency_ms": 2180.8,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -256,7 +256,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Tienes 4 retiros gratis al mes en ventanilla con la cuenta de ahorros. A partir del quinto retiro, se cobra S/ 3.50 por operación. [fuente: cuenta_ahorros.md | Costos]",
+      "answer": "Tienes 4 retiros gratis al mes en ventanilla con la cuenta de ahorros. Desde el quinto retiro en ventanilla se cobra S/ 3.50 por operación. [fuente: cuenta_ahorros.md]",
       "sources": [
         "cuenta_ahorros.md"
       ],
@@ -266,8 +266,8 @@
         "cuenta_ahorros.md",
         "deposito_plazo.md"
       ],
-      "cost_usd": 0.000198,
-      "latency_ms": 2868.2,
+      "cost_usd": 0.000197,
+      "latency_ms": 2287.1,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -290,7 +290,7 @@
         "cuenta_ahorros.md"
       ],
       "cost_usd": 0.000194,
-      "latency_ms": 2627.0,
+      "latency_ms": 2201.8,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -313,7 +313,7 @@
         "deposito_plazo.md"
       ],
       "cost_usd": 0.000184,
-      "latency_ms": 2289.0,
+      "latency_ms": 1885.8,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -336,7 +336,7 @@
         "deposito_plazo.md"
       ],
       "cost_usd": 0.000191,
-      "latency_ms": 2441.5,
+      "latency_ms": 1999.2,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -348,7 +348,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Si cancelas el depósito a plazo antes del plazo establecido, los intereses se recalculan con la TREA de la cuenta de ahorros. [fuente: deposito_plazo.md | Cancelación anticipada]",
+      "answer": "Si cancelas tu depósito a plazo antes del tiempo establecido, los intereses se recalculan con la TREA de la cuenta de ahorros. Esto significa que podrías recibir una cantidad menor de intereses de lo esperado. [fuente: deposito_plazo.md]",
       "sources": [
         "deposito_plazo.md"
       ],
@@ -358,8 +358,8 @@
         "deposito_plazo.md",
         "deposito_plazo.md"
       ],
-      "cost_usd": 0.000192,
-      "latency_ms": 2368.5,
+      "cost_usd": 0.000198,
+      "latency_ms": 2298.8,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -381,8 +381,8 @@
         "prestamo_personal.md",
         "canales_y_reclamos.md"
       ],
-      "cost_usd": 0.000185,
-      "latency_ms": 2280.2,
+      "cost_usd": 0.000184,
+      "latency_ms": 1907.7,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -405,7 +405,7 @@
         "canales_y_reclamos.md"
       ],
       "cost_usd": 0.000186,
-      "latency_ms": 2333.7,
+      "latency_ms": 2503.5,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -423,7 +423,7 @@
       ],
       "retrieved_sources": [],
       "cost_usd": 0.000143,
-      "latency_ms": 1648.9,
+      "latency_ms": 1743.7,
       "key_fact_recall": 1.0
     },
     {
@@ -439,7 +439,7 @@
       ],
       "retrieved_sources": [],
       "cost_usd": 0.000143,
-      "latency_ms": 1825.0,
+      "latency_ms": 1646.4,
       "key_fact_recall": 1.0
     },
     {
@@ -453,7 +453,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000101,
-      "latency_ms": 822.5
+      "latency_ms": 800.1
     },
     {
       "id": "q21",
@@ -466,7 +466,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000103,
-      "latency_ms": 907.9
+      "latency_ms": 1091.0
     },
     {
       "id": "q22",
@@ -478,8 +478,8 @@
       "answer": "Solo puedo ayudarte con temas de productos y servicios de Banco Andino.",
       "sources": [],
       "retrieved_sources": [],
-      "cost_usd": 0.000103,
-      "latency_ms": 829.9,
+      "cost_usd": 0.000101,
+      "latency_ms": 1889.1,
       "guardrail_ok": true
     },
     {
@@ -492,8 +492,8 @@
       "answer": "Solo puedo ayudarte con temas de productos y servicios de Banco Andino.",
       "sources": [],
       "retrieved_sources": [],
-      "cost_usd": 9.9e-05,
-      "latency_ms": 723.1,
+      "cost_usd": 0.000102,
+      "latency_ms": 896.1,
       "guardrail_ok": true
     },
     {
@@ -507,7 +507,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.0,
-      "latency_ms": 3.1,
+      "latency_ms": 3.3,
       "guardrail_ok": true
     },
     {
@@ -517,7 +517,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "La membresía anual de la Tarjeta de Crédito Andina Clásica cuesta S/ 99. Sin embargo, esta membresía se exonera si consumes al menos S/ 500 al mes durante el año. [fuente: tarjeta_credito.md]",
+      "answer": "La membresía anual de la Tarjeta de Crédito Andina Clásica cuesta S/ 99. Sin embargo, puedes exonera la membresía si consumes al menos S/ 500 al mes durante el año. [fuente: tarjeta_credito.md]",
       "sources": [
         "tarjeta_credito.md"
       ],
@@ -527,8 +527,8 @@
         "prestamo_personal.md",
         "tarjeta_credito.md"
       ],
-      "cost_usd": 0.000206,
-      "latency_ms": 3775.1,
+      "cost_usd": 0.000203,
+      "latency_ms": 2719.5,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0,
@@ -550,7 +550,7 @@
         "prestamo_personal.md"
       ],
       "cost_usd": 0.000162,
-      "latency_ms": 2278.1,
+      "latency_ms": 1718.8,
       "abstained": true
     },
     {
@@ -568,8 +568,8 @@
         "prestamo_capital_trabajo.md",
         "tarjeta_credito.md"
       ],
-      "cost_usd": 0.000163,
-      "latency_ms": 1974.3,
+      "cost_usd": 0.000162,
+      "latency_ms": 1672.3,
       "abstained": true
     },
     {
@@ -579,7 +579,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Si te robaron la tarjeta, bloquéala de inmediato desde la app o llamando a la línea 0800-00-123, que está disponible las 24 horas. Es importante actuar rápido para proteger tu información. [fuente: tarjeta_credito.md | Pérdida o robo]",
+      "answer": "Si te robaron la tarjeta, bloquéala de inmediato desde la app o llamando a la línea 0800-00-123, disponible las 24 horas. Es importante actuar rápido para proteger tu información. [fuente: tarjeta_credito.md | Pérdida o robo]",
       "sources": [
         "tarjeta_credito.md"
       ],
@@ -590,7 +590,7 @@
         "tarjeta_credito.md"
       ],
       "cost_usd": 0.000203,
-      "latency_ms": 2630.2,
+      "latency_ms": 2655.6,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -602,7 +602,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "El banco nunca te pedirá tus claves ni códigos de verificación por WhatsApp, llamada o correo. Es probable que ese SMS no sea legítimo. Te recomendamos no responder ni proporcionar información personal. [fuente: canales_y_reclamos.md | Seguridad]",
+      "answer": "El banco nunca te pedirá tus claves ni códigos de verificación por WhatsApp, llamada o correo. Si recibiste un SMS solicitando esta información, es probable que sea un intento de fraude. Te recomendamos no responder y, si tienes dudas, comunicarte con nosotros a través de nuestros canales de atención. [fuente: canales_y_reclamos.md | Seguridad]",
       "sources": [
         "canales_y_reclamos.md"
       ],
@@ -612,8 +612,8 @@
         "prestamo_personal.md",
         "canales_y_reclamos.md"
       ],
-      "cost_usd": 0.000198,
-      "latency_ms": 2356.2,
+      "cost_usd": 0.000211,
+      "latency_ms": 2319.0,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -629,7 +629,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000105,
-      "latency_ms": 842.7,
+      "latency_ms": 998.6,
       "key_fact_recall": 1.0
     },
     {
@@ -642,8 +642,8 @@
       "answer": "¿Sobre qué producto me consultas? Puedo ayudarte con: Cuenta Ahorro Andina, Depósito a Plazo Andino, Préstamo Capital de Trabajo, Préstamo Personal, Tarjeta de Crédito Andina Clásica.",
       "sources": [],
       "retrieved_sources": [],
-      "cost_usd": 0.000105,
-      "latency_ms": 856.9,
+      "cost_usd": 0.000107,
+      "latency_ms": 919.4,
       "key_fact_recall": 1.0
     },
     {
@@ -659,7 +659,7 @@
       ],
       "retrieved_sources": [],
       "cost_usd": 0.000142,
-      "latency_ms": 1771.2,
+      "latency_ms": 1740.6,
       "key_fact_recall": 1.0,
       "guardrail_ok": true
     },
@@ -681,7 +681,7 @@
         "tarjeta_credito.md"
       ],
       "cost_usd": 0.0002,
-      "latency_ms": 3425.1,
+      "latency_ms": 2467.2,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -697,7 +697,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000102,
-      "latency_ms": 936.6
+      "latency_ms": 767.4
     },
     {
       "id": "q35",
@@ -715,7 +715,7 @@
         "prestamo_capital_trabajo.md"
       ],
       "cost_usd": 0.000167,
-      "latency_ms": 2650.6,
+      "latency_ms": 2003.8,
       "abstained": true
     }
   ]

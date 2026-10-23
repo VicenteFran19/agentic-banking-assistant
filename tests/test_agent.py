@@ -59,3 +59,29 @@ def test_pregunta_ambigua_pide_aclaracion(assistant):
     res = assistant.ask("¿Cuál es el monto máximo?")
     assert res["route"] == "clarify"
     assert "producto" in res["answer"]
+
+
+def test_cita_inventada_produce_abstencion():
+    """Si el LLM cita un archivo que no fue recuperado, guard_out se abstiene."""
+    from assistant import prompts
+    from assistant.config import get_settings
+    from assistant.embeddings import get_embedder
+    from assistant.graph import build_graph
+    from assistant.ingest import load_documents
+    from assistant.llm import FakeLLM, LLMResponse
+    from assistant.retriever import HybridRetriever
+
+    class LiarLLM(FakeLLM):
+        def chat(self, system, user, json_mode=False):
+            if "[TASK:ANSWER]" in system:
+                return LLMResponse("La TEA es 1%. [fuente: inventado.md]", 10, 10, self.model)
+            return super().chat(system, user, json_mode)
+
+    settings = get_settings()
+    chunks = load_documents(settings.docs_dir)
+    graph = build_graph(LiarLLM(), HybridRetriever(chunks, get_embedder(settings)), settings)
+    state = graph.invoke({"user_input": "¿Cuál es la TEA del préstamo personal?"},
+                         config={"configurable": {"thread_id": "t-liar"}})
+    assert state["route"] == "rag"
+    assert state["answer"] == prompts.NO_INFO_MSG and state["sources"] == []
+    

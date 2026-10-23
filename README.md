@@ -32,10 +32,10 @@ flowchart LR
 | Orquestación agéntica | `StateGraph` de LangGraph con enrutamiento condicional (5 rutas) y checkpointer de memoria acotada por thread |
 | Recuperación | Chunking por sección + búsqueda vectorial (Chroma) + BM25, fusionadas con Reciprocal Rank Fusion |
 | Generación | `gpt-4o-mini`, temperatura 0, respuesta solo desde el contexto, con citas obligatorias |
-| Guardrails | Enmascarado de DNI, correo, teléfono y tarjeta antes de persistir o enviar al LLM; detección de prompt injection; abstención si no hay fuente |
+| Guardrails | Enmascarado de DNI, CCI, correo, teléfono y tarjeta antes de persistir o enviar al LLM (sin confundir montos con DNI); detección de prompt injection abstención si no hay fuente o si la cita no corresponde a un documento recuperado |
 | Herramienta | Simulador de cuota (método francés) en Python con validación de tipos y rangos: el LLM solo extrae parámetros, nunca calcula |
 | Evaluación | Precisión de enrutamiento, hit rate de recuperación, recall de datos clave, faithfulness (LLM-as-judge), abstención, guardrails, costo y latencia |
-| Ingeniería | FastAPI, Docker, 66 pruebas con pytest y CI en GitHub Actions |
+| Ingeniería | FastAPI, Docker, 72 pruebas con pytest y CI en GitHub Actions |
 
 ## Inicio rápido
 
@@ -55,6 +55,8 @@ Sin API key, todo funciona en **modo offline** (`LLM_PROVIDER=fake`): un LLM sim
 make test
 make eval-offline
 ```
+
+Para conectar un frontend (p. ej. en Vercel), define `ALLOWED_ORIGINS` con su URL en el `.env` (por defecto `*`). El contenedor respeta `$PORT` para desplegar en Render, Railway o Cloud Run.
 
 Ejemplo con la API:
 
@@ -113,7 +115,7 @@ Lección: una mejora en un nodo puede degradar métricas aguas abajo. Por eso ca
 
 - **RAG híbrido con RRF.** Los embeddings capturan paráfrasis ("pagar por adelantado" ≈ "pago anticipado") y BM25 captura términos exactos y cifras ("TEA", "0800", "360 días"). RRF combina ambos rankings sin calibrar escalas de score.
 - **Chunking por sección con título.** Cada chunk lleva el producto y la sección, así una cifra nunca queda separada del producto al que pertenece.
-- **Abstención antes que alucinación.** Si el modelo no encuentra la respuesta o no cita una fuente, el guardrail de salida devuelve una respuesta segura y ofrece derivar a un asesor.
+- **Abstención antes que alucinación.** Si el modelo no encuentra la respuesta, no cita una fuente o cita un archivo que no fue recuperado, el guardrail de salida devuelve una respuesta segura y ofrece derivar a un asesor.
 - **Cálculos fuera del LLM.** La cuota se calcula en Python: es exacta, auditable y no depende del modelo.
 - **Costo observable.** Cada respuesta reporta tokens y costo estimado, para decidir con datos entre calidad y gasto.
 - **PII enmascarada en la frontera.** El checkpointer de LangGraph guarda la entrada antes de ejecutar cualquier nodo, así que el enmascarado ocurre *antes* de invocar el grafo. Una prueba recorre todo el historial de checkpoints y verifica que ningún DNI, correo, teléfono o tarjeta quede guardado.

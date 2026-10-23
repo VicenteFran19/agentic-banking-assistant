@@ -7,3 +7,4 @@ venv/
 reports/eval_fake.*
 chroma/
 .DS_Store
+.vscode/
