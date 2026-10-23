@@ -33,7 +33,13 @@ INJECTION_PATTERNS = [
     r"actua como (si no tuvieras|un hacker|dan)",
     r"jailbreak",
     r"modo desarrollador",
+    r"olvida (todo|lo anterior|tus (instrucciones|reglas))",
+    r"(instrucciones|reglas|configuracion) (internas|ocultas|secretas)",
+    r"(desactiva|sin) (tus )?(filtros|restricciones|guardrails)",
 ]
+
+# Sustituciones típicas para evadir patrones ("ign0ra", "1nstrucciones").
+_LEET = str.maketrans({"0": "o", "1": "i", "3": "e", "4": "a", "5": "s", "@": "a"})
 
 
 def mask_pii(text: str) -> tuple[str, bool]:
@@ -44,7 +50,7 @@ def mask_pii(text: str) -> tuple[str, bool]:
 
 
 def detect_injection(text: str) -> bool:
-    norm = normalize(text)
+    norm = re.sub(r"\s+", " ", normalize(text).translate(_LEET))
     return any(re.search(p, norm) for p in INJECTION_PATTERNS)
 
 
