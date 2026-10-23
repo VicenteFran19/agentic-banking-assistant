@@ -5,5 +5,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY src ./src
 COPY data ./data
+RUN useradd --create-home appuser
+USER appuser
 EXPOSE 8000
-CMD ["uvicorn", "assistant.api:app", "--host", "0.0.0.0", "--port", "8000"]
+# Render, Railway y Cloud Run asignan el puerto en $PORT; localmente usa 8000.
+CMD ["sh", "-c", "uvicorn assistant.api:app --host 0.0.0.0 --port ${PORT:-8000}"]
