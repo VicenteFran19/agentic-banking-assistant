@@ -56,12 +56,14 @@ def fact_present(answer: str, alternatives: list[str]) -> bool:
 
 
 NOT_OFFERED = re.compile(r"\bno (ofrecemos|ofrece|contamos|tenemos|cuenta con|esta disponible|encontre)\b")
-INVENTED_FIGURE = re.compile(r"\d+(?:[.,]\d+)?\s*%|s/\s*\d")
+FIGURE = re.compile(r"\d+(?:[.,]\d+)*")
 
 
-def declines_without_inventing(answer: str) -> bool:
+def declines_without_inventing(answer: str, context: str) -> bool:
+    """Aclara que no se ofrece y toda cifra de la respuesta existe en el contexto (no inventa)."""
     norm = normalize(answer)
-    return bool(NOT_OFFERED.search(norm)) and not INVENTED_FIGURE.search(norm)
+    figures = FIGURE.findall(re.sub(r"\[fuente:[^\]]*\]", "", answer))
+    return bool(NOT_OFFERED.search(norm)) and all(f in context for f in figures)
 
 
 def judge_faithfulness(assistant: Assistant, answer: str, retrieved: list[dict]) -> tuple[float, int, int]:
@@ -105,8 +107,13 @@ def run(provider: str | None) -> dict:
             row["key_fact_recall"] = sum(hits) / len(hits)
         if item.get("expect_no_info"):
             # v5: se mide el comportamiento, no una frase exacta. Pasa si el asistente se abstiene o si
-            # aclara que el banco no ofrece el producto, sin inventar tasas ni montos.
-            row["abstained"] = res["answer"] == prompts.NO_INFO_MSG or declines_without_inventing(res["answer"])
+            # aclara que el banco no ofrece el producto sin inventar cifras: puede mencionar las de un
+            # producto que sí existe, siempre que estén en el contexto.
+            context = "\n".join(r["text"] for r in res["retrieved"])
+            row["abstained"] = res["answer"] == prompts.NO_INFO_MSG or declines_without_inventing(res["answer"], context)
+        if res.get("abstention_reason"):
+            row["abstention_reason"] = res["abstention_reason"]
+            row["raw_answer"] = res["raw_answer"]
         if res["route"] == "rag" and res["answer"] != prompts.NO_INFO_MSG and res["retrieved"]:
             score, tin, tout = judge_faithfulness(assistant, res["answer"], res["retrieved"])
             row["faithfulness"] = score

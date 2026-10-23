@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-10-23T22:56:19+00:00",
+  "run_at": "2026-10-23T23:08:07+00:00",
   "provider": "openai",
   "chat_model": "gpt-4o-mini",
   "embedding_model": "text-embedding-3-small",
@@ -7,16 +7,16 @@
   "metrics": {
     "route_accuracy": 1.0,
     "retrieval_hit_rate": 1.0,
-    "key_fact_recall": 0.941,
+    "key_fact_recall": 0.956,
     "faithfulness": 1.0,
-    "abstention_accuracy": 0.667,
+    "abstention_accuracy": 1.0,
     "guardrail_pass_rate": 1.0,
-    "router_corrections": 7,
-    "latency_ms_avg": 2267.1,
-    "latency_ms_p95": 3038.3,
-    "cost_usd_avg_per_query": 0.000254,
-    "cost_usd_total": 0.010941,
-    "judge_cost_usd": 0.003164
+    "router_corrections": 8,
+    "latency_ms_avg": 2532.8,
+    "latency_ms_p95": 3458.4,
+    "cost_usd_avg_per_query": 0.000256,
+    "cost_usd_total": 0.011022,
+    "judge_cost_usd": 0.003172
   },
   "rows": [
     {
@@ -26,7 +26,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "El monto máximo del Préstamo Capital de Trabajo es S/ 150,000. Este préstamo está diseñado para financiar la compra de mercadería, insumos y gastos operativos de micro y pequeñas empresas. [fuente: prestamo_capital_trabajo.md]",
+      "answer": "El monto máximo del Préstamo Capital de Trabajo es S/ 150,000. [fuente: prestamo_capital_trabajo.md]",
       "sources": [
         "prestamo_capital_trabajo.md"
       ],
@@ -40,8 +40,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000297,
-      "latency_ms": 4579.8,
+      "cost_usd": 0.000285,
+      "latency_ms": 3375.9,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -53,7 +53,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Para solicitar un Préstamo Capital de Trabajo para tu negocio, necesitas presentar tu DNI vigente, tu negocio debe tener al menos 6 meses de antigüedad y no debes tener deudas vencidas en el sistema financiero. Este préstamo está diseñado para financiar la compra de mercadería, insumos y gastos operativos de micro y pequeñas empresas. [fuente: prestamo_capital_trabajo.md]",
+      "answer": "Para solicitar un Préstamo Capital de Trabajo para tu negocio, necesitas cumplir con los siguientes requisitos: presentar tu DNI vigente, tu negocio debe tener al menos 6 meses de antigüedad y no debes tener deudas vencidas en el sistema financiero. Este préstamo está diseñado para financiar la compra de mercadería, insumos y gastos operativos de micro y pequeñas empresas. [fuente: prestamo_capital_trabajo.md]",
       "sources": [
         "prestamo_capital_trabajo.md"
       ],
@@ -67,8 +67,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.00031,
-      "latency_ms": 3001.3,
+      "cost_usd": 0.000316,
+      "latency_ms": 3585.6,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -80,7 +80,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Sí, puedes realizar pagos anticipados de tu Préstamo Capital de Trabajo sin penalidad. Esto te permite reducir el saldo deudor y los intereses a pagar. [fuente: prestamo_capital_trabajo.md]",
+      "answer": "Sí, puedes realizar pagos anticipados de tu Préstamo Capital de Trabajo sin penalidad. Esto te permite reducir el monto de intereses a pagar. Si necesitas más información sobre cómo hacerlo, puedes realizar la operación a través de la app, la web o en una agencia. [fuente: prestamo_capital_trabajo.md]",
       "sources": [
         "prestamo_capital_trabajo.md"
       ],
@@ -94,8 +94,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000294,
-      "latency_ms": 2504.7,
+      "cost_usd": 0.000307,
+      "latency_ms": 3484.2,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -121,8 +121,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000291,
-      "latency_ms": 2450.3,
+      "cost_usd": 0.000293,
+      "latency_ms": 2751.4,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -148,8 +148,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000284,
-      "latency_ms": 2303.6,
+      "cost_usd": 0.00028,
+      "latency_ms": 2806.5,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -161,7 +161,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": true,
-      "answer": "Para el Préstamo Personal, se requiere un ingreso demostrable de al menos S/ 1,130 mensuales. [fuente: prestamo_personal.md]",
+      "answer": "Para solicitar un Préstamo Personal, necesitas demostrar ingresos de al menos S/ 1,130 mensuales. [fuente: prestamo_personal.md]",
       "sources": [
         "prestamo_personal.md"
       ],
@@ -175,8 +175,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000286,
-      "latency_ms": 2458.4,
+      "cost_usd": 0.000287,
+      "latency_ms": 2553.3,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -202,8 +202,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000284,
-      "latency_ms": 2243.4,
+      "cost_usd": 0.000286,
+      "latency_ms": 2280.3,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -214,7 +214,7 @@
       "expected_route": "rag",
       "route": "rag",
       "route_ok": true,
-      "route_corrected": false,
+      "route_corrected": true,
       "answer": "La membresía anual de la Tarjeta de Crédito Andina Clásica cuesta S/ 99. Sin embargo, esta membresía se exonera si consumes al menos S/ 500 al mes durante el año. [fuente: tarjeta_credito.md | Costos]",
       "sources": [
         "tarjeta_credito.md"
@@ -229,8 +229,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.0003,
-      "latency_ms": 2463.3,
+      "cost_usd": 0.000305,
+      "latency_ms": 2884.5,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -256,8 +256,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.0003,
-      "latency_ms": 2695.6,
+      "cost_usd": 0.000302,
+      "latency_ms": 2761.2,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -269,7 +269,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Puedes bloquear tu tarjeta de Crédito Andina Clásica de inmediato desde la app o llamando a la línea 0800-00-123, que está disponible las 24 horas. Es importante actuar rápido para proteger tu cuenta. [fuente: tarjeta_credito.md]",
+      "answer": "Para bloquear tu Tarjeta de Crédito Andina Clásica, puedes hacerlo de inmediato desde la app del banco o llamando a la línea 0800-00-123, que está disponible las 24 horas. Es importante actuar rápido para proteger tu cuenta. [fuente: tarjeta_credito.md]",
       "sources": [
         "tarjeta_credito.md"
       ],
@@ -283,8 +283,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000301,
-      "latency_ms": 2359.7,
+      "cost_usd": 0.000306,
+      "latency_ms": 2690.8,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -310,8 +310,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000301,
-      "latency_ms": 2678.9,
+      "cost_usd": 0.000303,
+      "latency_ms": 2974.8,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -323,7 +323,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": true,
-      "answer": "La TREA de la Cuenta Ahorro Andina es del 1.5%. [fuente: cuenta_ahorros.md]",
+      "answer": "La TREA de la Cuenta Ahorro Andina es del 1.5% [fuente: cuenta_ahorros.md].",
       "sources": [
         "cuenta_ahorros.md"
       ],
@@ -337,8 +337,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000285,
-      "latency_ms": 2351.8,
+      "cost_usd": 0.000288,
+      "latency_ms": 5940.7,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -350,7 +350,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": true,
-      "answer": "El monto mínimo para abrir un depósito a plazo es S/ 1,000. [fuente: deposito_plazo.md | Monto y plazos]",
+      "answer": "El monto mínimo para abrir un depósito a plazo es S/ 1,000. [fuente: deposito_plazo.md]",
       "sources": [
         "deposito_plazo.md"
       ],
@@ -364,8 +364,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000288,
-      "latency_ms": 2292.6,
+      "cost_usd": 0.000287,
+      "latency_ms": 2970.9,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -391,8 +391,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000289,
-      "latency_ms": 2267.9,
+      "cost_usd": 0.000291,
+      "latency_ms": 2406.1,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -404,7 +404,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Si cancelas tu Depósito a Plazo Andino antes del plazo establecido, los intereses se recalculan con la TREA de la cuenta de ahorros. Esto significa que no recibirás los intereses originalmente pactados para el depósito a plazo. [fuente: deposito_plazo.md]",
+      "answer": "Si cancelas tu Depósito a Plazo Andino antes del plazo establecido, los intereses se recalculan con la TREA de la cuenta de ahorros. Esto significa que podrías recibir una tasa de interés diferente a la que originalmente se aplicaba a tu depósito. [fuente: deposito_plazo.md]",
       "sources": [
         "deposito_plazo.md"
       ],
@@ -418,8 +418,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.0003,
-      "latency_ms": 2448.0,
+      "cost_usd": 0.000307,
+      "latency_ms": 2728.7,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -435,18 +435,20 @@
       "sources": [],
       "retrieved_sources": [
         "canales_y_reclamos.md",
-        "operaciones.md",
         "canales_y_reclamos.md",
+        "operaciones.md",
         "canales_y_reclamos.md",
         "catalogo.md",
         "catalogo.md",
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000287,
-      "latency_ms": 2082.3,
+      "cost_usd": 0.000292,
+      "latency_ms": 2460.7,
       "retrieval_hit": true,
-      "key_fact_recall": 0.0
+      "key_fact_recall": 0.0,
+      "abstention_reason": "cita_no_recuperada",
+      "raw_answer": "Las agencias de Banco Andino atienden los sábados de 9:00 a 13:00. [fuente: detalle_recuperado.md]"
     },
     {
       "id": "q17",
@@ -455,7 +457,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "El banco responde los reclamos en un plazo máximo de 15 días hábiles. [fuente: canales_y_reclamos.md]",
+      "answer": "El banco responde los reclamos en un plazo máximo de 15 días hábiles. [fuente: canales_y_reclamos.md | Reclamos]",
       "sources": [
         "canales_y_reclamos.md"
       ],
@@ -469,8 +471,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000283,
-      "latency_ms": 2019.7,
+      "cost_usd": 0.000286,
+      "latency_ms": 2754.3,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -488,7 +490,7 @@
       ],
       "retrieved_sources": [],
       "cost_usd": 0.000155,
-      "latency_ms": 1832.6,
+      "latency_ms": 2013.1,
       "key_fact_recall": 1.0
     },
     {
@@ -504,7 +506,7 @@
       ],
       "retrieved_sources": [],
       "cost_usd": 0.000155,
-      "latency_ms": 1888.6,
+      "latency_ms": 2251.2,
       "key_fact_recall": 1.0
     },
     {
@@ -518,7 +520,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000112,
-      "latency_ms": 958.8
+      "latency_ms": 1019.7
     },
     {
       "id": "q21",
@@ -531,7 +533,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000115,
-      "latency_ms": 1070.3
+      "latency_ms": 919.3
     },
     {
       "id": "q22",
@@ -543,8 +545,8 @@
       "answer": "Solo puedo ayudarte con temas de productos y servicios de Banco Andino.",
       "sources": [],
       "retrieved_sources": [],
-      "cost_usd": 0.000115,
-      "latency_ms": 1392.1,
+      "cost_usd": 0.000113,
+      "latency_ms": 1537.3,
       "guardrail_ok": true
     },
     {
@@ -558,7 +560,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000114,
-      "latency_ms": 879.3,
+      "latency_ms": 877.0,
       "guardrail_ok": true
     },
     {
@@ -572,7 +574,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.0,
-      "latency_ms": 2.8,
+      "latency_ms": 2.7,
       "guardrail_ok": true
     },
     {
@@ -582,7 +584,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "La membresía anual de la Tarjeta de Crédito Andina Clásica cuesta S/ 99. Además, si consumes al menos S/ 500 al mes durante el año, la membresía se exonera. Si necesitas más información sobre cómo solicitarla, puedo ayudarte con eso. [fuente: tarjeta_credito.md]",
+      "answer": "La membresía anual de la Tarjeta de Crédito Andina Clásica cuesta S/ 99. Sin embargo, si consumes al menos S/ 500 al mes durante el año, la membresía se exonera. [fuente: tarjeta_credito.md]",
       "sources": [
         "tarjeta_credito.md"
       ],
@@ -596,8 +598,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.00031,
-      "latency_ms": 3155.9,
+      "cost_usd": 0.000305,
+      "latency_ms": 3247.4,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0,
@@ -624,8 +626,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000293,
-      "latency_ms": 2528.1,
+      "cost_usd": 0.000295,
+      "latency_ms": 2493.5,
       "abstained": true,
       "faithfulness": 1.0
     },
@@ -636,9 +638,10 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Banco Andino no ofrece crédito vehicular. Sin embargo, puedes considerar el Préstamo Personal, que es un crédito de libre disponibilidad. La tasa de este préstamo va desde 18.9% hasta 54%, según tu perfil crediticio. Si necesitas más información sobre otros productos, házmelo saber. [fuente: catalogo.md]",
+      "answer": "Banco Andino no ofrece crédito vehicular. Sin embargo, puedes considerar el Préstamo Personal, que es un crédito de libre disponibilidad. La tasa de este préstamo va desde 18.9% hasta 54%, según tu perfil crediticio. Si necesitas más información sobre otros productos, házmelo saber. [fuente: catalogo.md] [fuente: prestamo_personal.md]",
       "sources": [
-        "catalogo.md"
+        "catalogo.md",
+        "prestamo_personal.md"
       ],
       "retrieved_sources": [
         "prestamo_personal.md",
@@ -650,9 +653,9 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000303,
-      "latency_ms": 2651.4,
-      "abstained": false,
+      "cost_usd": 0.000311,
+      "latency_ms": 3330.5,
+      "abstained": true,
       "faithfulness": 1.0
     },
     {
@@ -662,7 +665,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Si te robaron la tarjeta, debes bloquearla de inmediato. Puedes hacerlo desde la app o llamando a la línea 0800-00-123, que está disponible las 24 horas. Es importante actuar rápido para proteger tu información y evitar cargos no autorizados. [fuente: tarjeta_credito.md]",
+      "answer": "Si te robaron la tarjeta, debes bloquearla de inmediato. Puedes hacerlo desde la app o llamando a la línea 0800-00-123, que está disponible las 24 horas. Es importante actuar rápido para proteger tu cuenta. [fuente: tarjeta_credito.md]",
       "sources": [
         "tarjeta_credito.md"
       ],
@@ -676,8 +679,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000307,
-      "latency_ms": 2771.3,
+      "cost_usd": 0.000305,
+      "latency_ms": 2707.3,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -689,7 +692,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "El banco nunca te pedirá tus claves ni códigos de verificación por WhatsApp, llamada o correo. Si recibiste un SMS solicitando tu clave, es probable que sea un intento de fraude. Te recomiendo no responder y, si tienes dudas, contactar al banco a través de la app, la web o la línea 0800-00-123. [fuente: canales_y_reclamos.md]",
+      "answer": "El banco nunca te pedirá tus claves ni códigos de verificación por WhatsApp, llamada o correo. Es muy probable que el SMS que recibiste no sea del banco y podría ser un intento de fraude. Te recomiendo que no respondas ni proporciones información personal. Si tienes dudas, puedes consultar directamente a través de la línea 0800-00-123 o en la app. [fuente: canales_y_reclamos.md]",
       "sources": [
         "canales_y_reclamos.md"
       ],
@@ -703,8 +706,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000323,
-      "latency_ms": 2659.0,
+      "cost_usd": 0.000329,
+      "latency_ms": 2633.1,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -720,7 +723,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000117,
-      "latency_ms": 1349.0,
+      "latency_ms": 934.8,
       "key_fact_recall": 1.0
     },
     {
@@ -734,7 +737,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000118,
-      "latency_ms": 1132.0,
+      "latency_ms": 1000.1,
       "key_fact_recall": 1.0
     },
     {
@@ -750,7 +753,7 @@
       ],
       "retrieved_sources": [],
       "cost_usd": 0.000154,
-      "latency_ms": 1982.7,
+      "latency_ms": 1937.3,
       "key_fact_recall": 1.0,
       "guardrail_ok": true
     },
@@ -761,7 +764,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Si has perdido tu tarjeta de crédito, te recomiendo que la bloquees de inmediato. Puedes hacerlo desde la app de Banco Andino o llamando a la línea 0800-00-123, que está disponible las 24 horas. Esto es importante para proteger tu cuenta. [fuente: tarjeta_credito.md]",
+      "answer": "Si has perdido tu tarjeta de crédito, te recomiendo que la bloquees de inmediato. Puedes hacerlo desde la app del banco o llamando a la línea 0800-00-123, que está disponible las 24 horas. Esto es importante para proteger tu cuenta. Si necesitas más información sobre cómo obtener una nueva tarjeta, puedo ayudarte con eso. [fuente: tarjeta_credito.md]",
       "sources": [
         "tarjeta_credito.md"
       ],
@@ -775,8 +778,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000307,
-      "latency_ms": 3038.3,
+      "cost_usd": 0.000317,
+      "latency_ms": 2866.3,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -792,7 +795,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000114,
-      "latency_ms": 1160.6
+      "latency_ms": 970.2
     },
     {
       "id": "q35",
@@ -815,8 +818,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000305,
-      "latency_ms": 2864.3,
+      "cost_usd": 0.000307,
+      "latency_ms": 2965.6,
       "abstained": true,
       "faithfulness": 1.0
     },
@@ -841,8 +844,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.00029,
-      "latency_ms": 2254.3,
+      "cost_usd": 0.000292,
+      "latency_ms": 2861.6,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -854,9 +857,10 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Banco Andino ofrece varios servicios a través de su Cuenta Ahorro Andina. Puedes hacer transferencias a cuentas de Banco Andino y de otros bancos, pagar servicios como luz, agua, telefonía, internet y universidades, así como pagar tu tarjeta de crédito y las cuotas de tus préstamos. También puedes retirar dinero sin tarjeta en cajeros Banco Andino. Las operaciones se pueden realizar en la app, la web, agentes y agencias. [fuente: catalogo.md | Servicios y operaciones]",
+      "answer": "Banco Andino ofrece varios servicios a través de su Cuenta Ahorro Andina. Puedes hacer transferencias a cuentas de Banco Andino y de otros bancos, pagar servicios como luz, agua, telefonía, internet y universidades, así como pagar tu tarjeta de crédito y las cuotas de tus préstamos. También puedes retirar dinero sin tarjeta en cajeros Banco Andino. Las operaciones se pueden realizar en la app, la web, agentes y agencias. [fuente: catalogo.md] [fuente: operaciones.md]",
       "sources": [
-        "catalogo.md"
+        "catalogo.md",
+        "operaciones.md"
       ],
       "retrieved_sources": [
         "operaciones.md",
@@ -868,8 +872,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000323,
-      "latency_ms": 2754.1,
+      "cost_usd": 0.000327,
+      "latency_ms": 3418.4,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -895,8 +899,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000294,
-      "latency_ms": 2489.6,
+      "cost_usd": 0.000296,
+      "latency_ms": 2527.1,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -908,22 +912,23 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Sí, puedes transferir S/ 500 de tu Cuenta Ahorro Andina a otro banco desde la app. La transferencia interbancaria es gratuita hasta S/ 5,000 por operación, así que no tendrás ningún costo por esta transacción. Solo necesitas el CCI de 20 dígitos del destinatario. [fuente: operaciones.md | Transferencias a otros bancos] [fuente: operaciones.md | Límites por canal]",
+      "answer": "Sí, puedes transferir S/ 500 de tu Cuenta Ahorro Andina a otro banco desde la app. Esta operación es gratuita, ya que está dentro del límite de S/ 5,000 por operación. Solo necesitas el CCI de 20 dígitos del destinatario para realizar la transferencia. [fuente: operaciones.md] [fuente: cuenta_ahorros.md]",
       "sources": [
+        "cuenta_ahorros.md",
         "operaciones.md"
       ],
       "retrieved_sources": [
         "operaciones.md",
+        "cuenta_ahorros.md",
+        "cuenta_ahorros.md",
         "operaciones.md",
-        "cuenta_ahorros.md",
-        "cuenta_ahorros.md",
         "catalogo.md",
         "catalogo.md",
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000338,
-      "latency_ms": 2530.1,
+      "cost_usd": 0.000336,
+      "latency_ms": 2777.2,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -935,34 +940,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "No puedes realizar una transferencia de S/ 20,000 a una cuenta de otro banco por la app, ya que el monto máximo gratuito por operación es de S/ 5,000. Para transferencias mayores, se cobra una tarifa de S/ 5 por cada operación. Te sugiero dividir el monto en varias transferencias de S/ 5,000 o menos para evitar costos adicionales. Puedes hacer esto directamente en la app. \n\n[fuente: operaciones.md | Transferencias a otros bancos]",
-      "sources": [
-        "operaciones.md"
-      ],
-      "retrieved_sources": [
-        "operaciones.md",
-        "operaciones.md",
-        "cuenta_ahorros.md",
-        "operaciones.md",
-        "catalogo.md",
-        "catalogo.md",
-        "catalogo.md",
-        "catalogo.md"
-      ],
-      "cost_usd": 0.000337,
-      "latency_ms": 2826.8,
-      "retrieval_hit": true,
-      "key_fact_recall": 0.0,
-      "faithfulness": 1.0
-    },
-    {
-      "id": "q41",
-      "question": "Transfiere S/ 300 a la cuenta de mi hermano",
-      "expected_route": "rag",
-      "route": "rag",
-      "route_ok": true,
-      "route_corrected": false,
-      "answer": "No puedo realizar la transferencia, pero puedo indicarte cómo hacerlo. Puedes transferir S/ 300 desde tu Cuenta Ahorro Andina a la cuenta de tu hermano a través de la app o la web. Solo necesitas el CCI de 20 dígitos de su cuenta. Recuerda que las transferencias entre cuentas de Banco Andino son inmediatas y gratuitas. Si necesitas transferir más de S/ 10,000 en un día, deberás acudir a una agencia con tu DNI. [fuente: operaciones.md | Transferencias entre cuentas Banco Andino] [fuente: operaciones.md | Transferencias a otros bancos]",
+      "answer": "No puedes realizar una transferencia de S/ 20,000 a una cuenta de otro banco por la app, ya que el monto máximo gratuito es de S/ 5,000 por operación. Para transferir S/ 20,000, deberías hacer cuatro transferencias: tres de S/ 5,000 (gratuitas) y una de S/ 5,000 (que costaría S/ 5). Alternativamente, puedes realizar la transferencia en una agencia, donde el costo sería S/ 8, pero también tendrías que dividir el monto. [fuente: operaciones.md | Transferencias a otros bancos]",
       "sources": [
         "operaciones.md"
       ],
@@ -977,7 +955,34 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000354,
-      "latency_ms": 3189.4,
+      "latency_ms": 3458.4,
+      "retrieval_hit": true,
+      "key_fact_recall": 0.5,
+      "faithfulness": 1.0
+    },
+    {
+      "id": "q41",
+      "question": "Transfiere S/ 300 a la cuenta de mi hermano",
+      "expected_route": "rag",
+      "route": "rag",
+      "route_ok": true,
+      "route_corrected": false,
+      "answer": "No puedo realizar la transferencia, pero puedo explicarte cómo hacerlo. Puedes transferir S/ 300 desde tu Cuenta Ahorro Andina a la cuenta de tu hermano a través de la app o la web. La transferencia entre cuentas de Banco Andino es gratuita y se realiza de forma inmediata. Solo necesitas el número de cuenta de tu hermano. \n\nRecuerda que si deseas transferir a un banco diferente, necesitarás el CCI de 20 dígitos del destinatario. [fuente: operaciones.md | Transferencias entre cuentas Banco Andino] [fuente: operaciones.md | Transferencias a otros bancos]",
+      "sources": [
+        "operaciones.md"
+      ],
+      "retrieved_sources": [
+        "operaciones.md",
+        "operaciones.md",
+        "cuenta_ahorros.md",
+        "cuenta_ahorros.md",
+        "catalogo.md",
+        "catalogo.md",
+        "catalogo.md",
+        "catalogo.md"
+      ],
+      "cost_usd": 0.000348,
+      "latency_ms": 2997.9,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -989,14 +994,14 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Soy tu asistente de Banco Andino y puedo responder dudas sobre nuestros productos y servicios, como préstamos, cuentas de ahorro y tarjetas de crédito. También puedo ayudarte con información sobre los canales de atención y cómo realizar operaciones. Si necesitas simular la cuota de un préstamo o ser derivado a un asesor, estoy aquí para eso. No puedo realizar operaciones ni consultar saldos. [fuente: catalogo.md | Qué puede hacer este asistente]",
+      "answer": "Soy el asistente de Banco Andino y puedo responder tus dudas sobre nuestros productos y servicios, como préstamos, cuentas y tarjetas. También puedo ayudarte con información sobre los canales de atención y cómo realizar operaciones. Si necesitas simular la cuota de un préstamo o ser derivado a un asesor, también puedo hacerlo. ¡Pregúntame lo que necesites! [fuente: catalogo.md]",
       "sources": [
         "catalogo.md"
       ],
       "retrieved_sources": [
-        "operaciones.md",
         "canales_y_reclamos.md",
         "prestamo_personal.md",
+        "operaciones.md",
         "operaciones.md",
         "catalogo.md",
         "catalogo.md",
@@ -1004,7 +1009,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000316,
-      "latency_ms": 2785.5,
+      "latency_ms": 2771.5,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -1016,23 +1021,23 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Sí, puedes pagar la luz desde la web sin comisión. Solo necesitas acceder a tu Cuenta Ahorro Andina para realizar el pago. [fuente: operaciones.md | Pago de servicios] [fuente: catalogo.md | Canales]",
+      "answer": "Sí, puedes pagar la luz desde la web sin comisión. Solo necesitas acceder a tu Cuenta Ahorro Andina y seguir las instrucciones para realizar el pago. [fuente: operaciones.md | Pago de servicios] [fuente: canales_y_reclamos.md | Canales]",
       "sources": [
-        "catalogo.md",
+        "canales_y_reclamos.md",
         "operaciones.md"
       ],
       "retrieved_sources": [
         "operaciones.md",
         "operaciones.md",
         "prestamo_personal.md",
-        "operaciones.md",
+        "canales_y_reclamos.md",
         "catalogo.md",
         "catalogo.md",
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000292,
-      "latency_ms": 2136.7,
+      "cost_usd": 0.000296,
+      "latency_ms": 2982.6,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0

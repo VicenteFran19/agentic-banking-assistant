@@ -51,6 +51,8 @@ class Assistant:
             "sources": state.get("sources", []),
             "retrieved": state.get("retrieved", []),
             "pii_masked": state.get("pii_masked", False),
+            "abstention_reason": state.get("abstention_reason", ""),
+            "raw_answer": state.get("raw_answer", ""),
             "input_tokens": sum(u["input_tokens"] for u in usage if u["kind"] != "embedding"),
             "output_tokens": sum(u["output_tokens"] for u in usage),
             "cost_usd": round(self.cost_usd(usage), 6),

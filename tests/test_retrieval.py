@@ -49,6 +49,10 @@ def test_abstencion_mide_comportamiento_no_frase():
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "eval"))
     from run_eval import declines_without_inventing
 
-    assert declines_without_inventing("Banco Andino no ofrece crédito hipotecario. Sí tenemos Préstamo Personal.")
-    assert not declines_without_inventing("No ofrecemos hipotecario, pero la TEA sería 12%.")
-    assert not declines_without_inventing("El crédito hipotecario tiene una TEA de 9%.")
+    ctx = "Préstamo Personal — Tasas: La TEA va desde 18.9% hasta 54%."
+    assert declines_without_inventing("Banco Andino no ofrece crédito hipotecario. Sí tenemos Préstamo Personal.", ctx)
+    # Cifra de un producto real, presente en el contexto: no es inventada.
+    assert declines_without_inventing("No ofrecemos crédito vehicular; el Préstamo Personal tiene TEA de 18.9% a 54%.", ctx)
+    # Cifra que no existe en el contexto: inventada.
+    assert not declines_without_inventing("No ofrecemos hipotecario, pero la TEA sería 12%.", ctx)
+    assert not declines_without_inventing("El crédito hipotecario tiene una TEA de 9%.", ctx)
