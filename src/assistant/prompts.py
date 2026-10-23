@@ -54,9 +54,7 @@ NO_INFO_MSG = (
     "No encontré esa información en la documentación disponible. "
     "¿Quieres que te comunique con un asesor?"
 )
-HANDOFF_MSG = (
-    "Te comunico con un asesor humano. Si se trata de cargos no reconocidos, "
-    "bloquea tu tarjeta desde la app o llama a la línea 0800-00-123 (24 horas)."
-)
+HANDOFF_MSG = "Te comunico con un asesor humano, que continuará la atención."
+FRAUD_TIP = " Mientras tanto, bloquea tu tarjeta desde la app o llama a la línea 0800-00-123 (24 horas)."
 OUT_OF_SCOPE_MSG = "Solo puedo ayudarte con temas de productos y servicios de Banco Andino."
 CLARIFY_MSG = "¿Sobre qué producto me consultas? Puedo ayudarte con: {products}."

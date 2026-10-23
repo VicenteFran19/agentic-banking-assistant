@@ -102,3 +102,22 @@ def test_el_grafo_corrige_out_of_scope_bancario(assistant):
     state = graph.invoke({"user_input": "¿Tienen crédito hipotecario?"},
                          config={"configurable": {"thread_id": "t-oos"}})
     assert state["route"] == "rag" and state["route_corrected"]
+
+
+def test_detecta_reporte_de_fraude():
+    from assistant.routing import is_fraud_report
+
+    assert is_fraud_report("Me clonaron la tarjeta y aparecen consumos que no hice")
+    assert is_fraud_report("Veo cargos en mi tarjeta que no reconozco")
+    assert not is_fraud_report("Quiero hablar con un asesor")
+    assert not is_fraud_report("sí, comunícame")
+
+
+def test_derivacion_solo_sugiere_bloqueo_si_hay_fraude(assistant):
+    from assistant import prompts
+
+    fraude = assistant.ask("Quiero un asesor, hay consumos que no reconozco", thread_id="t-h1")
+    asesor = assistant.ask("Quiero hablar con un asesor", thread_id="t-h2")
+    assert fraude["route"] == asesor["route"] == "handoff"
+    assert "0800" in fraude["answer"]
+    assert asesor["answer"] == prompts.HANDOFF_MSG

@@ -46,3 +46,14 @@ def refine_route(route: str, question: str, history: list[dict]) -> tuple[str, b
     if mentions_specific_product(question) or mentions_specific_product(recent_user):
         return "rag", True
     return route, False
+
+
+FRAUD_TERMS = re.compile(
+    r"\b(fraude|estafa|clonad[oa]s?|clonaron|robaron|robo|hackearon|cargos?|consumos?|"
+    r"no (los |las )?reconozco|no (los |las )?hice|no autorice)\b"
+)
+
+
+def is_fraud_report(text: str) -> bool:
+    """True si el mensaje reporta un posible fraude (para agregar el consejo de bloquear la tarjeta)."""
+    return bool(FRAUD_TERMS.search(normalize(text)))
