@@ -5,7 +5,7 @@ def test_ruta_rag_con_fuente(assistant):
     res = assistant.ask("¿Cuánto cuesta la membresía de la tarjeta de crédito?")
     assert res["route"] == "rag"
     assert "99" in res["answer"]
-    assert res["sources"] == ["tarjeta_credito.md"]
+    assert "tarjeta_credito.md" in res["sources"]
 
 
 def test_ruta_simulador(assistant):
@@ -84,4 +84,6 @@ def test_cita_inventada_produce_abstencion():
                          config={"configurable": {"thread_id": "t-liar"}})
     assert state["route"] == "rag"
     assert state["answer"] == prompts.NO_INFO_MSG and state["sources"] == []
+    assert state["abstention_reason"] == "cita_no_recuperada"
+    assert "inventado.md" in state["raw_answer"]
     

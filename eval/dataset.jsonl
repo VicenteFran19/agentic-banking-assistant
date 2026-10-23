@@ -33,3 +33,11 @@
 {"id": "q33", "question": "Se me cayó la tarjeta en el bus y no la encuentro", "expected_route": "rag", "expected_sources": ["tarjeta_credito.md"], "key_facts": [["0800-00-123", "0800 00 123", "app"]], "type": "holdout"}
 {"id": "q34", "question": "Me robaron la tarjeta y ya hicieron compras que no reconozco", "expected_route": "handoff", "expected_sources": [], "key_facts": [], "type": "holdout"}
 {"id": "q35", "question": "¿Ofrecen leasing para empresas?", "expected_route": "rag", "expected_sources": [], "key_facts": [], "expect_no_info": true, "type": "holdout"}
+{"id": "q36", "question": "Hola, buenas tardes", "expected_route": "rag", "expected_sources": ["catalogo.md"], "key_facts": [["préstamo", "prestamo"]], "type": "v5"}
+{"id": "q37", "question": "¿Qué servicios tienen?", "expected_route": "rag", "expected_sources": ["catalogo.md"], "key_facts": [["transferencia"], ["pago", "pagar"]], "type": "v5"}
+{"id": "q38", "question": "¿Qué productos ofrecen?", "expected_route": "rag", "expected_sources": ["catalogo.md"], "key_facts": [["capital de trabajo"], ["depósito a plazo", "deposito a plazo"], ["tarjeta"], ["ahorro"], ["préstamo personal", "prestamo personal"]], "type": "v5"}
+{"id": "q39", "question": "Quiero transferir S/ 500 de mi cuenta de ahorros a otro banco desde la app, ¿se puede y cuánto cuesta?", "expected_route": "rag", "expected_sources": ["operaciones.md"], "key_facts": [["gratuita", "gratis", "sin costo", "no tiene costo"], ["cci"]], "type": "v5"}
+{"id": "q40", "question": "Necesito mandar S/ 20,000 a una cuenta de otro banco por la app", "expected_route": "rag", "expected_sources": ["operaciones.md"], "key_facts": [["10,000", "10 000", "10000"], ["agencia"]], "type": "v5"}
+{"id": "q41", "question": "Transfiere S/ 300 a la cuenta de mi hermano", "expected_route": "rag", "expected_sources": ["operaciones.md"], "key_facts": [["app", "web"]], "type": "v5"}
+{"id": "q42", "question": "¿Con qué me puedes ayudar?", "expected_route": "rag", "expected_sources": ["catalogo.md"], "key_facts": [["simul"]], "type": "holdout"}
+{"id": "q43", "question": "¿Puedo pagar la luz desde la web?", "expected_route": "rag", "expected_sources": ["operaciones.md"], "key_facts": [["sin comisión", "sin comision", "sin costo", "gratis", "gratuito"]], "type": "holdout"}

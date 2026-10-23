@@ -11,6 +11,13 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
+# Documento con la visión general del banco: se entrega SIEMPRE al modelo como contexto base
+# (no compite en la búsqueda), para que pueda responder preguntas de conjunto ("¿qué productos tienen?").
+CATALOG_DOC = "catalogo.md"
+# Documentos que no describen un producto (no entran en la lista de productos del router).
+NON_PRODUCT_DOCS = {CATALOG_DOC, "canales_y_reclamos.md", "operaciones.md"}
+
+
 @dataclass
 class Chunk:
     id: str
