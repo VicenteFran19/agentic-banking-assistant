@@ -17,7 +17,7 @@ from langgraph.graph import END, START, StateGraph
 
 from . import prompts
 from .config import Settings
-from .guardrails import cited_sources, detect_injection, has_citation, mask_pii
+from .guardrails import cited_sources, citations_grounded, detect_injection, mask_pii
 from .llm import BaseLLM, LLMResponse, parse_json
 from .retriever import HybridRetriever
 from .routing import refine_route
@@ -122,11 +122,16 @@ def build_graph(llm: BaseLLM, retriever: HybridRetriever, settings: Settings):
 
     def guard_out(state: AgentState) -> dict:
         answer = state["answer"]
-        if state["route"] == "rag" and answer != prompts.NO_INFO_MSG and not has_citation(answer):
-            answer = prompts.NO_INFO_MSG  # respuesta sin fuente = posible alucinación -> abstención
+        sources = state.get("sources", [])
+        if state["route"] == "rag" and answer != prompts.NO_INFO_MSG:
+            retrieved_sources = {r["source"] for r in state.get("retrieved", [])}
+            if not citations_grounded(answer, retrieved_sources):
+                # Sin cita, o citando un archivo que no se recuperó = posible alucinación -> abstención
+                answer, sources = prompts.NO_INFO_MSG, []
         answer, _ = mask_pii(answer)
-        return {"answer": answer, "history": [{"role": "user", "content": state["question"]},
-                                              {"role": "assistant", "content": answer}]}
+        return {"answer": answer, "sources": sources,
+                "history": [{"role": "user", "content": state["question"]},
+                            {"role": "assistant", "content": answer}]}
 
     graph = StateGraph(AgentState)
     for name, fn in [("guard_in", guard_in), ("router", router), ("rag", rag), ("simulator", simulator),

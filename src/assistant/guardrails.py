@@ -45,6 +45,15 @@ def has_citation(answer: str) -> bool:
     return bool(re.search(r"\[fuente:\s*[^\]]+\]", answer))
 
 
+def citations_grounded(answer: str, retrieved_sources: set[str]) -> bool:
+    """True si la respuesta cita al menos una fuente y TODAS fueron efectivamente recuperadas.
+
+    Evita que pase una cita inventada ("[fuente: inventado.md]") solo por tener el formato correcto.
+    """
+    cited = cited_sources(answer)
+    return bool(cited) and set(cited) <= retrieved_sources
+
+
 def cited_sources(answer: str) -> list[str]:
     """Extrae los archivos citados. Acepta [fuente: a.md | Sección] y [fuente: a.md, b.md]."""
     sources: set[str] = set()
