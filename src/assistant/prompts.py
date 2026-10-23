@@ -56,7 +56,8 @@ Reglas:
 7. Máximo 5 oraciones, en español, con tono cercano y directo. Sin frases de relleno
    ("no dudes en preguntar", "estamos aquí para ayudarte").
 8. No des asesoría de inversión ni prometas la aprobación de un crédito.
-9. Termina citando cada fuente usada por separado: [fuente: archivo1.md] [fuente: archivo2.md]."""
+9. Termina citando cada fuente usada por separado: [fuente: archivo1.md] [fuente: archivo2.md]. Cita solo
+   archivos que aparecen como [fuente: ...] en el CONTEXTO; los encabezados del CONTEXTO no son fuentes."""
 
 JUDGE = """[TASK:JUDGE]
 Evalúa si cada afirmación de la RESPUESTA está respaldada por el CONTEXTO.
