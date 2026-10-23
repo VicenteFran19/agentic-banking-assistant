@@ -20,7 +20,7 @@ from .config import Settings
 from .guardrails import cited_sources, citations_grounded, detect_injection, mask_pii
 from .llm import BaseLLM, LLMResponse, parse_json
 from .retriever import HybridRetriever
-from .routing import refine_route
+from .routing import is_fraud_report, refine_route
 from .tools import format_simulation, simulate_loan, validate_loan_params
 
 ROUTES = ("rag", "simulator", "clarify", "handoff", "out_of_scope")
@@ -115,7 +115,10 @@ def build_graph(llm: BaseLLM, retriever: HybridRetriever, settings: Settings):
         return {"answer": prompts.CLARIFY_MSG.format(products=", ".join(products))}
 
     def handoff(state: AgentState) -> dict:
-        return {"answer": prompts.HANDOFF_MSG}
+        answer = prompts.HANDOFF_MSG
+        if is_fraud_report(state["question"]):
+            answer += prompts.FRAUD_TIP  # el consejo de bloqueo solo aplica a fraude o robo
+        return {"answer": answer}
 
     def out_of_scope(state: AgentState) -> dict:
         return {"answer": prompts.OUT_OF_SCOPE_MSG}
