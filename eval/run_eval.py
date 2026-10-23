@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import statistics
 import sys
 from datetime import datetime, timezone
@@ -52,6 +53,15 @@ def load_dataset(path: Path) -> list[dict]:
 def fact_present(answer: str, alternatives: list[str]) -> bool:
     norm = normalize(answer)
     return any(normalize(alt) in norm for alt in alternatives)
+
+
+NOT_OFFERED = re.compile(r"\bno (ofrecemos|ofrece|contamos|tenemos|cuenta con|esta disponible|encontre)\b")
+INVENTED_FIGURE = re.compile(r"\d+(?:[.,]\d+)?\s*%|s/\s*\d")
+
+
+def declines_without_inventing(answer: str) -> bool:
+    norm = normalize(answer)
+    return bool(NOT_OFFERED.search(norm)) and not INVENTED_FIGURE.search(norm)
 
 
 def judge_faithfulness(assistant: Assistant, answer: str, retrieved: list[dict]) -> tuple[float, int, int]:
@@ -94,7 +104,9 @@ def run(provider: str | None) -> dict:
             hits = [fact_present(res["answer"], alts) for alts in item["key_facts"]]
             row["key_fact_recall"] = sum(hits) / len(hits)
         if item.get("expect_no_info"):
-            row["abstained"] = res["answer"] == prompts.NO_INFO_MSG
+            # v5: se mide el comportamiento, no una frase exacta. Pasa si el asistente se abstiene o si
+            # aclara que el banco no ofrece el producto, sin inventar tasas ni montos.
+            row["abstained"] = res["answer"] == prompts.NO_INFO_MSG or declines_without_inventing(res["answer"])
         if res["route"] == "rag" and res["answer"] != prompts.NO_INFO_MSG and res["retrieved"]:
             score, tin, tout = judge_faithfulness(assistant, res["answer"], res["retrieved"])
             row["faithfulness"] = score

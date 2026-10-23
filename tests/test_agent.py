@@ -5,7 +5,7 @@ def test_ruta_rag_con_fuente(assistant):
     res = assistant.ask("¿Cuánto cuesta la membresía de la tarjeta de crédito?")
     assert res["route"] == "rag"
     assert "99" in res["answer"]
-    assert res["sources"] == ["tarjeta_credito.md"]
+    assert "tarjeta_credito.md" in res["sources"]
 
 
 def test_ruta_simulador(assistant):

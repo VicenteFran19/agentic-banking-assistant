@@ -14,7 +14,7 @@ from chromadb.config import Settings as ChromaSettings
 from rank_bm25 import BM25Okapi
 
 from .embeddings import BaseEmbedder
-from .ingest import Chunk
+from .ingest import CATALOG_DOC, Chunk
 from .text import content_tokens
 
 
@@ -28,6 +28,9 @@ class Retrieved:
 
 class HybridRetriever:
     def __init__(self, chunks: list[Chunk], embedder: BaseEmbedder, candidates: int = 10, rrf_k: int = 60):
+        # El catálogo no se indexa: se entrega siempre completo como contexto base (ver graph.rag).
+        self.overview = [c for c in chunks if c.source == CATALOG_DOC]
+        chunks = [c for c in chunks if c.source != CATALOG_DOC]
         self.chunks = chunks
         self.by_id = {c.id: c for c in chunks}
         self.embedder = embedder

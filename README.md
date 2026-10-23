@@ -2,20 +2,37 @@
 
 Asistente conversacional bancario **agéntico** construido con **LangGraph**: enruta cada mensaje a la herramienta adecuada, responde con **RAG híbrido** (Chroma + BM25) citando sus fuentes, aplica **guardrails** de entrada y salida, mantiene **memoria** por conversación y se mide con un **pipeline de evaluación** que reporta calidad, costo y latencia por consulta.
 
-> Los documentos de productos son **ficticios** ("Banco Andino Demo") y se crearon solo para demostración.
+> Los documentos del banco son **ficticios** ("Banco Andino Demo") y se crearon solo para demostración.
+
+**Demo en vivo:** [agentic-banking-assistant-frontend.vercel.app](https://agentic-banking-assistant-frontend.vercel.app) · **API:** [agentic-banking-assistant.onrender.com/docs](https://agentic-banking-assistant.onrender.com/docs)
+
+> La API corre en el plan gratuito de Render: si estuvo inactiva, la primera consulta puede tardar alrededor de un minuto mientras el servicio despierta.
 
 ## Arquitectura
+
+### Despliegue
+
+```mermaid
+flowchart LR
+    B[Navegador] -- HTTPS --> F[Frontend<br/>HTML + JS en Vercel]
+    F -- "POST /chat (CORS)" --> API[API FastAPI + agente LangGraph<br/>Docker en Render]
+    API -- chat y embeddings --> OAI[OpenAI<br/>gpt-4o-mini]
+```
+
+El frontend y el backend se despliegan por separado desde el mismo repositorio. Cada merge a `main` actualiza ambos automáticamente. La API key de OpenAI vive solo como variable de entorno en Render, nunca en el código ni en el navegador.
+
+### Agente
 
 ```mermaid
 flowchart LR
     U[Mensaje] --> MP[Enmascarado de PII<br/>antes de persistir]
     MP --> GI[Guardrail de entrada<br/>prompt injection]
     GI -- bloqueado --> GO
-    GI --> R{Router LLM}
-    R -- rag --> RAG[RAG híbrido<br/>Chroma + BM25 + RRF]
+    GI --> R{Router LLM<br/>+ respaldo determinista}
+    R -- rag --> RAG[RAG<br/>catálogo + búsqueda híbrida]
     R -- simulator --> S[Simulador de cuota<br/>validación + cálculo en Python]
     R -- clarify --> C[Pregunta de aclaración]
-    R -- handoff --> H[Derivación a asesor]
+    R -- handoff --> H[Derivación a asesor<br/>bloqueo de tarjeta si hay fraude]
     R -- out_of_scope --> O[Fuera de alcance]
     RAG --> GO[Guardrail de salida<br/>citas + PII]
     S --> GO
@@ -25,17 +42,21 @@ flowchart LR
     GO --> A[Respuesta + costo + latencia]
     M[(Memoria por thread<br/>checkpointer)] -.-> R
     M -.-> RAG
+    K[(Catálogo del banco<br/>siempre en contexto)] -.-> RAG
+    D[(Documentos<br/>Chroma + BM25 + RRF)] -.-> RAG
 ```
 
 | Componente | Implementación |
 |---|---|
 | Orquestación agéntica | `StateGraph` de LangGraph con enrutamiento condicional (5 rutas) y checkpointer de memoria acotada por thread |
-| Recuperación | Chunking por sección + búsqueda vectorial (Chroma) + BM25, fusionadas con Reciprocal Rank Fusion |
-| Generación | `gpt-4o-mini`, temperatura 0, respuesta solo desde el contexto, con citas obligatorias |
-| Guardrails | Enmascarado de DNI, CCI, correo, teléfono y tarjeta antes de persistir o enviar al LLM (sin confundir montos con DNI); detección de prompt injection abstención si no hay fuente o si la cita no corresponde a un documento recuperado |
+| Base de conocimiento | 8 documentos modelados por dominio: 5 fichas de producto, un catálogo general, operaciones y servicios (transferencias, pagos, límites por canal, retiros) y canales y reclamos |
+| Recuperación | El catálogo se entrega siempre como contexto base; el detalle se busca con chunking por sección + búsqueda vectorial (Chroma) + BM25, fusionadas con Reciprocal Rank Fusion |
+| Generación | `gpt-4o-mini`, temperatura 0, respuesta solo desde el contexto, con citas obligatorias y verificación de cada elemento de preguntas compuestas (producto, operación, canal, monto) |
+| Guardrails | Enmascarado de DNI, CCI, correo, teléfono y tarjeta antes de persistir o enviar al LLM (sin confundir montos con DNI); detección de prompt injection; abstención si no hay fuente o si la cita no corresponde a un documento recuperado |
 | Herramienta | Simulador de cuota (método francés) en Python con validación de tipos y rangos: el LLM solo extrae parámetros, nunca calcula |
 | Evaluación | Precisión de enrutamiento, hit rate de recuperación, recall de datos clave, faithfulness (LLM-as-judge), abstención, guardrails, costo y latencia |
-| Ingeniería | FastAPI, Docker, 72 pruebas con pytest y CI en GitHub Actions |
+| Frontend | HTML y JavaScript sin dependencias, en Vercel: chat con un panel que muestra el recorrido de cada respuesta por el grafo, las fuentes, el costo y la latencia |
+| Ingeniería | FastAPI, Docker, despliegue en Render, 77 pruebas con pytest y CI en GitHub Actions |
 
 ## Inicio rápido
 
@@ -67,7 +88,7 @@ curl -X POST localhost:8000/chat -H "Content-Type: application/json" \
 
 ## Evaluación
 
-El set de evaluación (`eval/dataset.jsonl`) tiene 35 casos: preguntas de productos, simulaciones, preguntas ambiguas, casos holdout, derivaciones, preguntas sin respuesta en la documentación y casos adversariales (prompt injection, datos personales, temas fuera de alcance).
+El set de evaluación (`eval/dataset.jsonl`) tiene 43 casos: preguntas de productos, preguntas compuestas (producto + operación + canal + monto), saludos y preguntas sobre el catálogo, simulaciones, preguntas ambiguas, casos holdout, derivaciones, preguntas sin respuesta en la documentación y casos adversariales (prompt injection, datos personales, temas fuera de alcance).
 
 | Métrica | Qué mide | Umbral |
 |---|---|---|
@@ -75,7 +96,7 @@ El set de evaluación (`eval/dataset.jsonl`) tiene 35 casos: preguntas de produc
 | retrieval_hit_rate | Fuente esperada dentro del top-k recuperado | ≥ 0.85 |
 | key_fact_recall | Cifras y condiciones esperadas presentes en la respuesta | ≥ 0.85 |
 | faithfulness | Afirmaciones respaldadas por el contexto (LLM-as-judge) | ≥ 0.85 |
-| abstention_accuracy | Se abstiene cuando la documentación no tiene la respuesta | 1.00 |
+| abstention_accuracy | Ante un producto que no existe, se abstiene o aclara que el banco no lo ofrece, sin inventar tasas ni montos | 1.00 |
 | guardrail_pass_rate | Casos adversariales manejados correctamente | 1.00 |
 | costo y latencia | USD y ms por consulta (promedio y p95) | se reporta |
 
@@ -115,10 +136,13 @@ Lección: una mejora en un nodo puede degradar métricas aguas abajo. Por eso ca
 
 - **RAG híbrido con RRF.** Los embeddings capturan paráfrasis ("pagar por adelantado" ≈ "pago anticipado") y BM25 captura términos exactos y cifras ("TEA", "0800", "360 días"). RRF combina ambos rankings sin calibrar escalas de score.
 - **Chunking por sección con título.** Cada chunk lleva el producto y la sección, así una cifra nunca queda separada del producto al que pertenece.
+- **Catálogo como contexto base.** Un RAG solo ve los fragmentos más parecidos a la pregunta, así que no puede responder preguntas de conjunto ("¿qué productos tienen?"): listaba 3 de 5. El catálogo del banco es corto y se entrega siempre al modelo, fuera del índice de búsqueda; la búsqueda aporta el detalle. Cuesta unos tokens más por consulta a cambio de que el modelo conozca el mapa completo del banco.
+- **Conocimiento modelado por dominio, no por preguntas.** Las preguntas reales combinan entidades: "transferir S/ 500 de mi cuenta de ahorros a otro banco desde la app" involucra un producto, una operación, un canal y un monto. Los documentos describen esas entidades (productos, operaciones, canales, límites) y el prompt pide verificar cada elemento contra ellos. No hay respuestas programadas para frases específicas.
 - **Abstención antes que alucinación.** Si el modelo no encuentra la respuesta, no cita una fuente o cita un archivo que no fue recuperado, el guardrail de salida devuelve una respuesta segura y ofrece derivar a un asesor.
 - **Cálculos fuera del LLM.** La cuota se calcula en Python: es exacta, auditable y no depende del modelo.
 - **Costo observable.** Cada respuesta reporta tokens y costo estimado, para decidir con datos entre calidad y gasto.
 - **PII enmascarada en la frontera.** El checkpointer de LangGraph guarda la entrada antes de ejecutar cualquier nodo, así que el enmascarado ocurre *antes* de invocar el grafo. Una prueba recorre todo el historial de checkpoints y verifica que ningún DNI, correo, teléfono o tarjeta quede guardado.
+- **Derivación según contexto.** El consejo de bloquear la tarjeta solo se agrega cuando el mensaje reporta fraude, robo o cargos no reconocidos.
 - **Router con respaldo determinista.** El LLM decide la ruta, y el código corrige dos errores caros y fáciles de detectar (`routing.py`): pedir aclaración cuando el producto ya es único, y marcar como fuera de alcance una pregunta bancaria sobre un producto inexistente (debe ir al RAG para abstenerse y ofrecer un asesor). Cada corrección queda registrada (`route_corrected`) y se cuenta en la evaluación.
 - **Aclarar antes que adivinar.** Si una pregunta depende del producto ("¿cuál es la tasa?") y ni el mensaje ni el historial lo indican, el agente pregunta en lugar de responder sobre todos los productos.
 - **Validación del simulador.** Los parámetros que extrae el LLM se validan por tipo y rango (montos, TEA, plazo entero); un dato inválido produce un mensaje claro y nunca un error 500.
@@ -140,14 +164,17 @@ src/assistant/
   api.py, cli.py  # interfaces
 eval/             # dataset y runner de evaluación
 tests/            # pruebas unitarias y de integración
-data/docs/        # documentos ficticios de productos
+data/docs/        # base de conocimiento ficticia: productos, catálogo, operaciones, canales
+frontend/         # chat con panel de trazabilidad (Vercel)
 ```
 
 ## Limitaciones y siguientes pasos
 
 - La memoria vive en memoria del proceso. En producción usaría un checkpointer persistente (Postgres o Redis).
 - La detección de prompt injection es por patrones. El siguiente paso sería un clasificador dedicado.
-- El set de evaluación es pequeño (35 casos). Con usuarios reales se ampliaría a partir de conversaciones etiquetadas.
+- El set de evaluación es pequeño (43 casos). Con usuarios reales se ampliaría a partir de conversaciones etiquetadas.
+- El catálogo completo cabe en el contexto porque el banco tiene pocos productos. Con una oferta grande se reemplazaría por recuperación jerárquica o por metadatos de tipo de entidad (producto, operación, canal).
+- La derivación a un asesor es simulada. En producción crearía un ticket en el CRM o transferiría el chat a la cola de atención humana con el historial ya enmascarado.
 - Siguientes pasos: reranking con cross-encoder, caché semántica para reducir costo y trazas con LangSmith u OpenTelemetry.
 
 ## Licencia

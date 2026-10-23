@@ -18,6 +18,7 @@ from langgraph.graph import END, START, StateGraph
 from . import prompts
 from .config import Settings
 from .guardrails import cited_sources, citations_grounded, detect_injection, mask_pii
+from .ingest import NON_PRODUCT_DOCS
 from .llm import BaseLLM, LLMResponse, parse_json
 from .retriever import HybridRetriever
 from .routing import is_fraud_report, refine_route
@@ -56,7 +57,8 @@ def _history_text(history: list[dict], turns: int) -> str:
 
 def build_graph(llm: BaseLLM, retriever: HybridRetriever, settings: Settings):
     products = sorted({c.text.split(" — ")[0].replace(" (Banco Andino Demo)", "")
-                       for c in retriever.chunks if not c.source.startswith("canales")})
+                       for c in retriever.chunks if c.source not in NON_PRODUCT_DOCS})
+    overview = retriever.overview  # visión general del banco, siempre en el contexto del RAG
 
     router_prompt = prompts.ROUTER.replace("<PRODUCTOS>", ", ".join(products))
 
@@ -87,7 +89,10 @@ def build_graph(llm: BaseLLM, retriever: HybridRetriever, settings: Settings):
             if prev_user:
                 query = f"{prev_user[-1]} {question}"
         results, emb_tokens = retriever.search(query, k=settings.top_k)
-        context = "\n\n".join(f"[fuente: {r.chunk.source} | {r.chunk.section}] {r.chunk.text}" for r in results)
+        # Contexto = catálogo completo (mapa del banco) + fragmentos recuperados (detalle).
+        catalog = "\n".join(f"[fuente: {c.source} | {c.section}] {c.text}" for c in overview)
+        detail = "\n\n".join(f"[fuente: {r.chunk.source} | {r.chunk.section}] {r.chunk.text}" for r in results)
+        context = f"CATÁLOGO DEL BANCO:\n{catalog}\n\nDETALLE RECUPERADO:\n{detail}" if overview else detail
         user = (f"HISTORIAL:\n{_history_text(history, settings.history_turns)}\n\n"
                 f"CONTEXTO:\n{context}\n\nPREGUNTA: {question}")
         resp = llm.chat(prompts.ANSWER, user)
@@ -95,6 +100,8 @@ def build_graph(llm: BaseLLM, retriever: HybridRetriever, settings: Settings):
                                   {"kind": "embedding", "model": "embedding", "input_tokens": emb_tokens, "output_tokens": 0}]
         retrieved = [{"source": r.chunk.source, "section": r.chunk.section, "text": r.chunk.text,
                       "score": r.score, "vector_rank": r.vector_rank, "bm25_rank": r.bm25_rank} for r in results]
+        retrieved += [{"source": c.source, "section": c.section, "text": c.text, "score": None,
+                       "vector_rank": None, "bm25_rank": None} for c in overview]
         answer = resp.text.strip()
         if "NO_INFO" in answer:
             return {"answer": prompts.NO_INFO_MSG, "sources": [], "retrieved": retrieved, "usage": usage}
