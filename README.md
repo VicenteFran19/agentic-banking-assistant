@@ -102,20 +102,21 @@ El set de evaluación (`eval/dataset.jsonl`) tiene 43 casos: preguntas de produc
 
 ### Resultados con gpt-4o-mini
 
-<!-- Ejecuta `make eval` y pega aquí la tabla de reports/eval_openai.md -->
-Promedio de 4 corridas independientes sobre 35 casos (v4):
+Versión actual (v5.2): 2 corridas independientes sobre 43 casos. Se muestra la v4 (4 corridas sobre 35 casos) como referencia.
 
-| Métrica | Resultado |
-|---|---|
-| route_accuracy (sistema) | 1.00 en las 4 corridas |
-| route_accuracy (solo router LLM) | 0.89 (31/35; 4 casos corregidos por el respaldo determinista, los mismos en cada corrida) |
-| retrieval_hit_rate | 1.00 |
-| key_fact_recall | 1.00 |
-| faithfulness (LLM-as-judge) | 1.00 |
-| abstention_accuracy | 1.00 |
-| guardrail_pass_rate | 1.00 |
-| Latencia promedio / p95 | ≈ 2.1 s / 2.7–3.6 s |
-| Costo por consulta | US$ 0.00016 (≈ US$ 0.16 por 1,000 consultas) |
+| Métrica | v4 | v5.2 |
+|---|---|---|
+| route_accuracy (sistema) | 1.00 | 1.00 |
+| route_accuracy (solo router LLM) | 0.89 (31/35) | 0.81–0.84 (7 u 8 aclaraciones innecesarias por corrida, corregidas por el respaldo determinista) |
+| retrieval_hit_rate | 1.00 | 1.00 |
+| key_fact_recall | 1.00 | 0.96 en ambas corridas |
+| faithfulness (LLM-as-judge) | 1.00 | 1.00 |
+| abstention_accuracy | 1.00 | 1.00 |
+| guardrail_pass_rate | 1.00 | 1.00 |
+| Latencia promedio / p95 | ≈ 2.1 s / 2.7–3.6 s | 2.2–2.4 s / 3.2–3.4 s |
+| Costo por consulta | US$ 0.00016 | US$ 0.00026 (≈ US$ 0.26 por 1,000 consultas) |
+
+Los datos clave que faltan son omisiones, no errores: en la corrida analizada, el saludo no mencionó los préstamos (q36) y la respuesta sobre transferir S/ 500 no mencionó el CCI (q39), que en una corrida previa sí aparecía. Aun con temperatura 0 las respuestas varían entre corridas: hasta los casos que corrige el respaldo del router cambian de una corrida a otra. Por eso se mide más de una vez.
 
 > El set es pequeño y fue construido junto con el sistema: estos números validan el comportamiento esperado, no garantizan el desempeño con usuarios reales.
 
@@ -130,7 +131,12 @@ Promedio de 4 corridas independientes sobre 35 casos (v4):
 | v3 | 32 | 0.938 | 0.950 | Catálogo de productos en el prompt del router, criterio de phishing frente a fraude consumado y respaldo determinista para `clarify` (1 corrección real). **Efecto secundario:** con el catálogo visible, "¿Tienen crédito hipotecario?" se marcó fuera de alcance; y "me robaron la tarjeta" resultó un caso de frontera inestable entre corridas. |
 | v4 | 35 | 1.00 (0.89 solo LLM) | 1.00 | Ejemplos de frontera en el router (con frases distintas al set de evaluación), out_of_scope restringido a temas no bancarios, respaldo determinista para preguntas bancarias marcadas fuera de alcance y 3 casos *holdout* para medir generalización. Resultado estable en 4 corridas; costo por consulta +54% (US$ 0.00011 → 0.00016) por el prompt más largo del router, un trade-off aceptado a cambio de enrutamiento correcto. |
 
-Lección: una mejora en un nodo puede degradar métricas aguas abajo. Por eso cada cambio se evalúa con el set completo y los casos nuevos se agregan *antes* de ajustar los prompts.
+| v5 | 43 | 1.00 (0.84 solo LLM) | 1.00 | Pruebas manuales revelaron fallas que el set no cubría: "hola" caía fuera de alcance y "¿qué productos tienen?" listaba 3 de 5, porque el RAG solo ve 4 fragmentos. **Se agregaron 8 casos antes de corregir** (saludos, catálogo y preguntas compuestas como "transferir S/ 500 a otro banco desde la app"). Cambios: catálogo como contexto base, documento de operaciones (transferencias, límites, pagos) y un prompt que verifica cada elemento de la pregunta. Hallazgos: el juez de faithfulness dio 1.0 a una respuesta que sugería dividir S/ 20,000 en cuatro transferencias (cada afirmación era cierta, el razonamiento no), y solo key_fact_recall lo detectó. La métrica de abstención exigía una frase exacta: se cambió para medir comportamiento (aclarar que no se ofrece sin inventar cifras). Costo por consulta +61%. |
+| v5.1–v5.2 | 43 | 1.00 (0.81–0.84 solo LLM) | 1.00 | Se registra el motivo de cada abstención y la respuesta original del modelo. Eso reveló que "¿hasta qué hora atienden las agencias?" se bloqueaba porque el modelo citaba un encabezado del contexto como si fuera un archivo: el guardrail actuó bien y se aclaró en el prompt qué se puede citar. También mostró que el error de los S/ 20,000 era de recuperación, no de razonamiento: el límite diario estaba en otra sección y nunca llegaba al modelo. Se movió junto a las transferencias que restringe. |
+
+Lecciones: una mejora en un nodo puede degradar métricas aguas abajo; métricas en 1.0 solo dicen que el sistema pasa *ese* set, no que cubra lo que preguntan los usuarios; y una métrica gruesa puede esconder fallas (retrieval_hit_rate mide el archivo correcto, no la sección correcta).
+
+Por eso cada cambio se evalúa con el set completo y los casos nuevos se agregan *antes* de ajustar los prompts.
 
 ## Decisiones de diseño
 
@@ -138,7 +144,8 @@ Lección: una mejora en un nodo puede degradar métricas aguas abajo. Por eso ca
 - **Chunking por sección con título.** Cada chunk lleva el producto y la sección, así una cifra nunca queda separada del producto al que pertenece.
 - **Catálogo como contexto base.** Un RAG solo ve los fragmentos más parecidos a la pregunta, así que no puede responder preguntas de conjunto ("¿qué productos tienen?"): listaba 3 de 5. El catálogo del banco es corto y se entrega siempre al modelo, fuera del índice de búsqueda; la búsqueda aporta el detalle. Cuesta unos tokens más por consulta a cambio de que el modelo conozca el mapa completo del banco.
 - **Conocimiento modelado por dominio, no por preguntas.** Las preguntas reales combinan entidades: "transferir S/ 500 de mi cuenta de ahorros a otro banco desde la app" involucra un producto, una operación, un canal y un monto. Los documentos describen esas entidades (productos, operaciones, canales, límites) y el prompt pide verificar cada elemento contra ellos. No hay respuestas programadas para frases específicas.
-- **Abstención antes que alucinación.** Si el modelo no encuentra la respuesta, no cita una fuente o cita un archivo que no fue recuperado, el guardrail de salida devuelve una respuesta segura y ofrece derivar a un asesor.
+- **Abstención antes que alucinación.** Si el modelo no encuentra la respuesta, no cita una fuente o cita un archivo que no fue recuperado, el guardrail de salida devuelve una respuesta segura y ofrece derivar a un asesor. El motivo de la abstención y la respuesta original quedan registrados para poder diagnosticarla.
+- **Cada regla junto a la operación que restringe.** El límite diario de transferencias vive dentro de la sección de transferencias, no en una sección aparte de "límites": si la búsqueda trae la operación, trae también su restricción.
 - **Cálculos fuera del LLM.** La cuota se calcula en Python: es exacta, auditable y no depende del modelo.
 - **Costo observable.** Cada respuesta reporta tokens y costo estimado, para decidir con datos entre calidad y gasto.
 - **PII enmascarada en la frontera.** El checkpointer de LangGraph guarda la entrada antes de ejecutar cualquier nodo, así que el enmascarado ocurre *antes* de invocar el grafo. Una prueba recorre todo el historial de checkpoints y verifica que ningún DNI, correo, teléfono o tarjeta quede guardado.
@@ -175,7 +182,8 @@ frontend/         # chat con panel de trazabilidad (Vercel)
 - El set de evaluación es pequeño (43 casos). Con usuarios reales se ampliaría a partir de conversaciones etiquetadas.
 - El catálogo completo cabe en el contexto porque el banco tiene pocos productos. Con una oferta grande se reemplazaría por recuperación jerárquica o por metadatos de tipo de entidad (producto, operación, canal).
 - La derivación a un asesor es simulada. En producción crearía un ticket en el CRM o transferiría el chat a la cola de atención humana con el historial ya enmascarado.
-- Siguientes pasos: reranking con cross-encoder, caché semántica para reducir costo y trazas con LangSmith u OpenTelemetry.
+- El router LLM pide aclaración de más en preguntas que ya nombran el producto (7 u 8 de 43 por corrida); el respaldo determinista lo corrige, pero la causa está en el prompt del router.
+- Siguientes pasos: varias corridas por versión para medir estabilidad, evaluar la recuperación por sección y no solo por archivo, reranking con cross-encoder, caché semántica para reducir costo y trazas con LangSmith u OpenTelemetry.
 
 ## Licencia
 

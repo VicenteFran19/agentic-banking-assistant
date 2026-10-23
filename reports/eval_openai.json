@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-10-23T23:14:52+00:00",
+  "run_at": "2026-10-23T23:22:48+00:00",
   "provider": "openai",
   "chat_model": "gpt-4o-mini",
   "embedding_model": "text-embedding-3-small",
@@ -11,12 +11,12 @@
     "faithfulness": 1.0,
     "abstention_accuracy": 1.0,
     "guardrail_pass_rate": 1.0,
-    "router_corrections": 7,
-    "latency_ms_avg": 2391.0,
-    "latency_ms_p95": 3378.7,
+    "router_corrections": 8,
+    "latency_ms_avg": 2243.4,
+    "latency_ms_p95": 3211.4,
     "cost_usd_avg_per_query": 0.000262,
-    "cost_usd_total": 0.011258,
-    "judge_cost_usd": 0.003356
+    "cost_usd_total": 0.01126,
+    "judge_cost_usd": 0.003352
   },
   "rows": [
     {
@@ -25,7 +25,7 @@
       "expected_route": "rag",
       "route": "rag",
       "route_ok": true,
-      "route_corrected": false,
+      "route_corrected": true,
       "answer": "El monto máximo del Préstamo Capital de Trabajo es S/ 150,000. [fuente: prestamo_capital_trabajo.md]",
       "sources": [
         "prestamo_capital_trabajo.md"
@@ -40,8 +40,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.00029,
-      "latency_ms": 3210.9,
+      "cost_usd": 0.000297,
+      "latency_ms": 3443.5,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -67,8 +67,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000317,
-      "latency_ms": 3076.1,
+      "cost_usd": 0.000321,
+      "latency_ms": 3211.4,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -80,7 +80,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Sí, puedes realizar pagos anticipados de tu Préstamo Capital de Trabajo sin penalidad. Esto te permite reducir el monto de intereses que pagarías a lo largo del tiempo. Si necesitas más información sobre cómo hacerlo, puedes realizar la operación a través de la app, la web o en una agencia. \n\n[fuente: prestamo_capital_trabajo.md]",
+      "answer": "Sí, puedes realizar pagos anticipados de tu Préstamo Capital de Trabajo sin penalidad. Esto te permite reducir el monto de intereses a pagar. Si necesitas más información sobre el préstamo o cómo realizar el pago, házmelo saber. [fuente: prestamo_capital_trabajo.md]",
       "sources": [
         "prestamo_capital_trabajo.md"
       ],
@@ -94,8 +94,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000318,
-      "latency_ms": 3385.3,
+      "cost_usd": 0.000308,
+      "latency_ms": 2677.5,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -122,7 +122,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000298,
-      "latency_ms": 2474.5,
+      "latency_ms": 2840.1,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -148,8 +148,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.00029,
-      "latency_ms": 2672.4,
+      "cost_usd": 0.000287,
+      "latency_ms": 2619.5,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -176,7 +176,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000293,
-      "latency_ms": 2368.8,
+      "latency_ms": 2575.1,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -188,7 +188,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": true,
-      "answer": "La TEA del Préstamo Personal va desde 18.9% hasta 54%, según tu perfil crediticio. [fuente: prestamo_personal.md | Tasas]",
+      "answer": "La TEA del Préstamo Personal va desde 18.9% hasta 54%, según tu perfil crediticio. [fuente: prestamo_personal.md]",
       "sources": [
         "prestamo_personal.md"
       ],
@@ -202,8 +202,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000294,
-      "latency_ms": 2419.5,
+      "cost_usd": 0.000291,
+      "latency_ms": 3688.3,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -230,7 +230,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000316,
-      "latency_ms": 2715.4,
+      "latency_ms": 2681.3,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -257,7 +257,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000304,
-      "latency_ms": 2717.0,
+      "latency_ms": 3011.4,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -269,7 +269,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Puedes bloquear tu Tarjeta de Crédito Andina Clásica de inmediato desde la app o llamando a la línea 0800-00-123, que está disponible las 24 horas. Es importante actuar rápido para proteger tu cuenta. [fuente: tarjeta_credito.md]",
+      "answer": "Puedes bloquear tu tarjeta de Crédito Andina Clásica de inmediato desde la app o llamando a la línea 0800-00-123, que está disponible las 24 horas. Es importante actuar rápido para proteger tu cuenta. [fuente: tarjeta_credito.md]",
       "sources": [
         "tarjeta_credito.md"
       ],
@@ -283,8 +283,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000308,
-      "latency_ms": 2748.2,
+      "cost_usd": 0.000307,
+      "latency_ms": 2965.7,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -311,7 +311,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000324,
-      "latency_ms": 2870.2,
+      "latency_ms": 2281.3,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -338,7 +338,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000291,
-      "latency_ms": 2466.6,
+      "latency_ms": 2399.4,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -365,7 +365,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000296,
-      "latency_ms": 2560.1,
+      "latency_ms": 2378.6,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -391,8 +391,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000294,
-      "latency_ms": 2479.9,
+      "cost_usd": 0.000296,
+      "latency_ms": 2071.6,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -404,7 +404,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Si cancelas tu Depósito a Plazo Andino antes del plazo establecido, los intereses se recalculan con la TREA de la cuenta de ahorros. Esto significa que no recibirás los intereses originalmente pactados para el depósito a plazo. [fuente: deposito_plazo.md | Cancelación anticipada]",
+      "answer": "Si cancelas tu Depósito a Plazo Andino antes del plazo establecido, los intereses se recalculan con la TREA de la cuenta de ahorros. Esto significa que no recibirás los intereses originalmente pactados, sino que se ajustarán a la tasa de la cuenta de ahorros. [fuente: deposito_plazo.md | Cancelación anticipada]",
       "sources": [
         "deposito_plazo.md"
       ],
@@ -418,8 +418,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000312,
-      "latency_ms": 3071.8,
+      "cost_usd": 0.000318,
+      "latency_ms": 2714.4,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -445,8 +445,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.00031,
-      "latency_ms": 2226.2,
+      "cost_usd": 0.000311,
+      "latency_ms": 1941.6,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -473,7 +473,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000291,
-      "latency_ms": 2518.3,
+      "latency_ms": 2219.0,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -491,7 +491,7 @@
       ],
       "retrieved_sources": [],
       "cost_usd": 0.000155,
-      "latency_ms": 1948.3,
+      "latency_ms": 2005.6,
       "key_fact_recall": 1.0
     },
     {
@@ -507,7 +507,7 @@
       ],
       "retrieved_sources": [],
       "cost_usd": 0.000155,
-      "latency_ms": 1970.6,
+      "latency_ms": 1709.4,
       "key_fact_recall": 1.0
     },
     {
@@ -521,7 +521,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000112,
-      "latency_ms": 1003.0
+      "latency_ms": 829.0
     },
     {
       "id": "q21",
@@ -534,7 +534,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000115,
-      "latency_ms": 1047.6
+      "latency_ms": 850.7
     },
     {
       "id": "q22",
@@ -547,7 +547,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000115,
-      "latency_ms": 890.7,
+      "latency_ms": 823.1,
       "guardrail_ok": true
     },
     {
@@ -561,7 +561,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000114,
-      "latency_ms": 976.3,
+      "latency_ms": 900.9,
       "guardrail_ok": true
     },
     {
@@ -575,7 +575,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.0,
-      "latency_ms": 2.1,
+      "latency_ms": 3.4,
       "guardrail_ok": true
     },
     {
@@ -600,7 +600,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000325,
-      "latency_ms": 3431.3,
+      "latency_ms": 2418.1,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0,
@@ -613,7 +613,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Banco Andino no ofrece crédito hipotecario. Sin embargo, puedes considerar el Préstamo Personal, que es un crédito de libre disponibilidad para gastos personales, estudios o viajes. Si necesitas más información sobre este producto, házmelo saber. [fuente: catalogo.md]",
+      "answer": "Banco Andino no ofrece crédito hipotecario. Sin embargo, puedes considerar el Préstamo Personal, que es un crédito de libre disponibilidad para gastos personales, estudios o viajes. Si necesitas más información sobre este producto, estaré encantado de ayudarte. [fuente: catalogo.md]",
       "sources": [
         "catalogo.md"
       ],
@@ -627,8 +627,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.0003,
-      "latency_ms": 2752.8,
+      "cost_usd": 0.000301,
+      "latency_ms": 3178.7,
       "abstained": true,
       "faithfulness": 1.0
     },
@@ -639,7 +639,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Banco Andino no ofrece un crédito vehicular. Sin embargo, puedes considerar el Préstamo Personal, que es un crédito de libre disponibilidad. La tasa de este préstamo va desde 18.9% hasta 54%, según tu perfil crediticio. \n\n[fuente: catalogo.md] [fuente: prestamo_personal.md]",
+      "answer": "Banco Andino no ofrece un crédito vehicular. Sin embargo, puedes considerar el Préstamo Personal, que es un crédito de libre disponibilidad. La tasa de este préstamo va desde 18.9% hasta 54%, según tu perfil crediticio. Si necesitas más información sobre otros productos, házmelo saber. [fuente: catalogo.md] [fuente: prestamo_personal.md]",
       "sources": [
         "catalogo.md",
         "prestamo_personal.md"
@@ -654,8 +654,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.00031,
-      "latency_ms": 2714.4,
+      "cost_usd": 0.000317,
+      "latency_ms": 2583.0,
       "abstained": true,
       "faithfulness": 1.0
     },
@@ -681,7 +681,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000315,
-      "latency_ms": 2840.8,
+      "latency_ms": 2182.4,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -693,7 +693,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "No, ese mensaje no es del banco. El Banco Andino nunca te pedirá tus claves ni códigos de verificación por WhatsApp, llamada o correo. Te recomiendo que no compartas esa información y, si tienes dudas, contactes al banco a través de la app, la web o la línea 0800-00-123. [fuente: canales_y_reclamos.md]",
+      "answer": "No, ese SMS no es del banco. El Banco Andino nunca te pedirá tus claves ni códigos de verificación por WhatsApp, llamada o correo. Te recomiendo que no compartas esa información y, si tienes dudas, contactes al banco a través de la app, la web o la línea 0800-00-123. [fuente: canales_y_reclamos.md | Seguridad]",
       "sources": [
         "canales_y_reclamos.md"
       ],
@@ -707,8 +707,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000337,
-      "latency_ms": 3078.3,
+      "cost_usd": 0.000338,
+      "latency_ms": 2612.0,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -724,7 +724,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000117,
-      "latency_ms": 1013.6,
+      "latency_ms": 971.7,
       "key_fact_recall": 1.0
     },
     {
@@ -737,8 +737,8 @@
       "answer": "¿Sobre qué producto me consultas? Puedo ayudarte con: Cuenta Ahorro Andina, Depósito a Plazo Andino, Préstamo Capital de Trabajo, Préstamo Personal, Tarjeta de Crédito Andina Clásica.",
       "sources": [],
       "retrieved_sources": [],
-      "cost_usd": 0.000117,
-      "latency_ms": 930.7,
+      "cost_usd": 0.000118,
+      "latency_ms": 913.0,
       "key_fact_recall": 1.0
     },
     {
@@ -754,7 +754,7 @@
       ],
       "retrieved_sources": [],
       "cost_usd": 0.000154,
-      "latency_ms": 2184.4,
+      "latency_ms": 1963.8,
       "key_fact_recall": 1.0,
       "guardrail_ok": true
     },
@@ -765,7 +765,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Si perdiste tu tarjeta de crédito, debes bloquearla de inmediato. Puedes hacerlo desde la app de Banco Andino o llamando a la línea 0800-00-123, que está disponible las 24 horas. Esto es importante para proteger tu cuenta. [fuente: tarjeta_credito.md]",
+      "answer": "Si perdiste tu tarjeta de crédito, debes bloquearla de inmediato. Puedes hacerlo desde la app o llamando a la línea 0800-00-123, que está disponible las 24 horas. Es importante actuar rápido para proteger tu cuenta. [fuente: tarjeta_credito.md]",
       "sources": [
         "tarjeta_credito.md"
       ],
@@ -779,8 +779,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000312,
-      "latency_ms": 2513.3,
+      "cost_usd": 0.000311,
+      "latency_ms": 2552.8,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -796,7 +796,7 @@
       "sources": [],
       "retrieved_sources": [],
       "cost_usd": 0.000114,
-      "latency_ms": 942.6
+      "latency_ms": 876.0
     },
     {
       "id": "q35",
@@ -820,7 +820,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000311,
-      "latency_ms": 3378.7,
+      "latency_ms": 2580.8,
       "abstained": true,
       "faithfulness": 1.0
     },
@@ -845,8 +845,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000298,
-      "latency_ms": 2515.2,
+      "cost_usd": 0.000294,
+      "latency_ms": 2147.6,
       "retrieval_hit": true,
       "key_fact_recall": 0.0,
       "faithfulness": 1.0
@@ -858,7 +858,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Banco Andino ofrece varios servicios a través de su Cuenta Ahorro Andina. Puedes hacer transferencias a cuentas de Banco Andino y de otros bancos, pagar servicios como luz, agua, telefonía, internet y universidades, pagar tu Tarjeta de Crédito Andina Clásica y las cuotas de tus préstamos, y retirar dinero sin tarjeta en cajeros Banco Andino. Todos estos servicios están disponibles en la app, la web, y en agentes. [fuente: catalogo.md | Servicios y operaciones] [fuente: operaciones.md | Pago de servicios] [fuente: operaciones.md | Pago de tarjeta y préstamos] [fuente: operaciones.md | Retiros sin tarjeta] [fuente: operaciones.md | Transferencias entre cuentas Banco Andino]",
+      "answer": "Banco Andino ofrece varios servicios a través de su Cuenta Ahorro Andina. Puedes hacer transferencias a cuentas de Banco Andino y de otros bancos, pagar servicios como luz, agua, telefonía, internet y universidades, pagar tu tarjeta de crédito y las cuotas de tus préstamos, y retirar dinero sin tarjeta en cajeros Banco Andino. Todos estos servicios están disponibles en la app, la web, agentes y agencias. [fuente: catalogo.md | Servicios y operaciones] [fuente: operaciones.md | Pago de servicios] [fuente: operaciones.md | Pago de tarjeta y préstamos] [fuente: operaciones.md | Retiros sin tarjeta] [fuente: operaciones.md | Transferencias entre cuentas Banco Andino]",
       "sources": [
         "catalogo.md",
         "operaciones.md"
@@ -873,8 +873,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000366,
-      "latency_ms": 3449.3,
+      "cost_usd": 0.000362,
+      "latency_ms": 3289.7,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -901,7 +901,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000301,
-      "latency_ms": 2544.1,
+      "latency_ms": 2256.1,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -929,7 +929,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000349,
-      "latency_ms": 2987.6,
+      "latency_ms": 2519.3,
       "retrieval_hit": true,
       "key_fact_recall": 0.5,
       "faithfulness": 1.0
@@ -956,7 +956,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000341,
-      "latency_ms": 2860.5,
+      "latency_ms": 2951.0,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -968,9 +968,8 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "No puedo realizar la transferencia, pero puedo explicarte cómo hacerlo. Puedes transferir S/ 300 desde tu Cuenta Ahorro Andina a la cuenta de tu hermano a través de la app o la web, ya que el monto está dentro del límite diario de S/ 10,000. Solo necesitas el CCI de 20 dígitos de su cuenta. Recuerda que las transferencias son gratuitas en esos canales. \n\nSi necesitas más ayuda, puedes consultar en la app o la web. [fuente: catalogo.md] [fuente: operaciones.md]",
+      "answer": "No puedo realizar la transferencia, pero puedo indicarte cómo hacerlo. Puedes transferir S/ 300 desde tu Cuenta Ahorro Andina a la cuenta de tu hermano a través de la app o la web. Esta operación es gratuita y puedes hacerlo en cualquier momento, ya que está dentro del límite diario de S/ 10,000. Solo necesitas el CCI de 20 dígitos de la cuenta de tu hermano. \n\n[fuente: operaciones.md | Transferencias entre cuentas Banco Andino] [fuente: operaciones.md | Límites por canal]",
       "sources": [
-        "catalogo.md",
         "operaciones.md"
       ],
       "retrieved_sources": [
@@ -983,8 +982,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000365,
-      "latency_ms": 3138.8,
+      "cost_usd": 0.000364,
+      "latency_ms": 2599.6,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -996,7 +995,7 @@
       "route": "rag",
       "route_ok": true,
       "route_corrected": false,
-      "answer": "Soy el asistente de Banco Andino y puedo responder tus dudas sobre nuestros productos y servicios, como préstamos, cuentas y tarjetas. También puedo ayudarte con información sobre los canales de atención y cómo realizar operaciones. Si necesitas simular la cuota de un préstamo o derivarte a un asesor, también puedo hacerlo. ¡Pregúntame lo que necesites! [fuente: catalogo.md | Qué puede hacer este asistente]",
+      "answer": "Soy el asistente de Banco Andino y puedo responder dudas sobre nuestros productos y servicios, como préstamos, cuentas y tarjetas. También puedo ayudarte con información sobre los canales de atención y cómo realizar operaciones. Si necesitas simular la cuota de un préstamo o derivarte a un asesor, también puedo hacerlo. ¡Pregúntame lo que necesites! [fuente: catalogo.md | Qué puede hacer este asistente]",
       "sources": [
         "catalogo.md"
       ],
@@ -1010,8 +1009,8 @@
         "catalogo.md",
         "catalogo.md"
       ],
-      "cost_usd": 0.000323,
-      "latency_ms": 3299.0,
+      "cost_usd": 0.000322,
+      "latency_ms": 2435.4,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
@@ -1038,7 +1037,7 @@
         "catalogo.md"
       ],
       "cost_usd": 0.000291,
-      "latency_ms": 2418.1,
+      "latency_ms": 2594.0,
       "retrieval_hit": true,
       "key_fact_recall": 1.0,
       "faithfulness": 1.0
